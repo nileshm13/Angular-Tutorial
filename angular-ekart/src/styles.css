@@ -17,3 +17,7 @@ a{
     padding: 0 10px; 
     color: #28282B;
 }
+
+p{
+    margin-bottom: 0;
+}
