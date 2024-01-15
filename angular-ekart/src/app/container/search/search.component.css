@@ -28,3 +28,12 @@
     margin: 20px auto;
     padding: 10px 140px;
 }
+
+.btn-search-disabled{
+    color: #999;
+    background-color: #aaa;
+    cursor: not-allowed;
+    margin-left: -1px;
+    padding: 9.5px 30px;
+    border: #aaa 1px solid;
+}
