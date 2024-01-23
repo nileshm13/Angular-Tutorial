@@ -1,2 +1,2 @@
-<app-search></app-search>
-<product-list></product-list>
+<app-search (searchTextChanged) = "OnSearchTextChanged($event)"></app-search>
+<product-list [searchText] = "searchText"></product-list>
