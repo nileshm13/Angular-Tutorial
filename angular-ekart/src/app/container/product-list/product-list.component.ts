@@ -531,5 +531,15 @@ export class ProductListComponent {
       imageURL: "https://images.vans.com/is/image/Vans/MV122M-HERO?$583x583$",
       slug: "michael-feburary-sk8-hi"
     }
-  ];
+  ];  
+  selectedFilterBtn: string = 'all';
+
+  onFilterChanged(value: string){
+    this.selectedFilterBtn = value
+    console.log("value received in product list " + value);    
+  }
+
+  totalProducts = this.products.length;
+  totalInStockProducts =  this.products.filter(p=> p.is_in_inventory).length;
+  totalOutOfStockProducts =  this.products.filter(p=> !p.is_in_inventory).length;
 }
