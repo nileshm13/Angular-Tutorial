@@ -7,3 +7,5 @@ Q. Now the question arises, how would child component know which ng-content is h
 Ans: For this, along with ng-content, define header class for header and footer class for footer like (in featured-brands):
 <ng-content select = ".title"></ng-content>
 <ng-content select = ".call-to-action"></ng-content>
+
+If no class is specified, all the contents specified between selector element replaces ng-content
