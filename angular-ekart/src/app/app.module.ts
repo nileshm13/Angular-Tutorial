@@ -13,6 +13,7 @@ import { ProductComponent } from './container/product-list/product/product.compo
 import { FilterComponent } from './container/product-list/filter/filter.component';
 import { ProductDetailsComponent } from './container/product-details/product-details.component';
 import { NgTemplateExampleComponent } from './container/ng-template-example/ng-template-example.component';
+import { NgContainerExampleComponent } from './container/ng-container-example/ng-container-example.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { NgTemplateExampleComponent } from './container/ng-template-example/ng-t
     ProductComponent,
     FilterComponent,
     ProductDetailsComponent,
-    NgTemplateExampleComponent
+    NgTemplateExampleComponent,
+    NgContainerExampleComponent
   ],
   imports: [
     BrowserModule,
