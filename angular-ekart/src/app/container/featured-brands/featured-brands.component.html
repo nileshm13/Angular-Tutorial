@@ -1,8 +1,7 @@
 <div class="ekart-featured-product-item">
     <ng-content select = ".title"></ng-content>
-    <p class="description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-    </p>
+    <ng-content select = ".description"></ng-content>
+    <ng-content select = ".test"></ng-content>
     <ng-content select = ".call-to-action"></ng-content>    
+    <button (click) = "showValue()">Test Content Child Functionality</button> 
 </div>
