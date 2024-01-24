@@ -1,0 +1,11 @@
+Template Referencing used above will only be available on button click, but what if we need it as soon as page laod, for it we use @ViewChild
+  // @ViewChild allows us to access DOM, Directive or Component
+  //   ViewChild(selector: string | Function | ProviderToken<unknown>, opts?: {
+  //     read?: any;
+  //     static?: boolean;
+  // }): any
+  selector - The directive type or the name used for querying.
+  read - Used to read a different token from the queried elements.
+  static - True to resolve query results before change detection runs, false to resolve after change detection. Defaults to false.
+
+  When assiging to template variables, can use ElementRef as return type
