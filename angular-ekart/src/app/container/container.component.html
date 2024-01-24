@@ -1,2 +1,6 @@
 <app-search (searchTextChanged) = "OnSearchTextChanged($event)"></app-search>
-<product-list [searchText] = "searchText"></product-list>
+<product-list [searchText] = "searchText" #productListComponent></product-list>
+<!-- Created a component based reference for product-list and utilized below so that product-details which is a pop-up gets shown only when 
+selected product has a value.
+Selected product will have a value on clicking product. -->
+<product-details *ngIf="productListComponent.selectedProduct" [productListComp]="productListComponent"></product-details>
