@@ -1,0 +1,14 @@
+<h1>{{title}}</h1>
+<br>
+<p>Ng-container is used when user wants to use multiple structural directives on the same element. We can assign if else
+    on an ng-container but the else condition must be in a ng-template not an ng-container. Passing a template reference
+    to ng-container in an else condition of ngIf gives an error</p>
+<p>When using ng-template, we call it using *ngTemplateOutlet inside div, we can replace div by ng-container</p>
+<ng-container *ngIf="toggle; else notoggle">
+    <p>Showing Toggle true </p>
+</ng-container>
+<ng-template #notoggle>
+    <p>Showing Toggle false </p>
+</ng-template>
+
+<button class="btn" (click)="toggleContainer()"> Toggle </button>
