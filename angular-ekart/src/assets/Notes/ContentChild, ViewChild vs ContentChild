@@ -1,0 +1,12 @@
+ContentChild:
+ng-Content is when HTML contents are projected from parent to child component.
+Parents have HTML with different contents, child has ng-content tag which gets replaced by Parent content.
+The child content and parent content matching happens using class name, if no class name specified, all the content between selector tag keeps on overwriting ng-content and last one stays
+@ContentChild is used to access HTML contents of parent in child usinng template reference variable, If there are two p Tags having same reference variable description2, only the first one will be referenced, First match stops searching process. Hence content of first p tag with #description2 gets displayed and second one is ignored.
+
+
+For ViewChild/ContentChild, if reference is HTML Element, return type is ElementRef
+For ViewChild/Content, if reference is a component reference, return type is Component
+For ViewChildren/ContentChildren, return type is an array, its a QueryList<ElementRef> or QueryList<ComponentName>
+ViewChild/ViewChildren is used to access HTML elements of its own template(HTML) or accessing child HTML component by parent
+ContentChild/ContentChildren is used to access "Projected Content" from Parent to Child. This is projected using ng-content.
