@@ -12,6 +12,7 @@ import { ProductListComponent } from './container/product-list/product-list.comp
 import { ProductComponent } from './container/product-list/product/product.component';
 import { FilterComponent } from './container/product-list/filter/filter.component';
 import { ProductDetailsComponent } from './container/product-details/product-details.component';
+import { NgTemplateExampleComponent } from './container/ng-template-example/ng-template-example.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ProductDetailsComponent } from './container/product-details/product-det
     ProductListComponent,
     ProductComponent,
     FilterComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    NgTemplateExampleComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 })
 export class ContainerComponent {
   searchText: string = '';
+  showNgTemplate: boolean = false;
   @ViewChild('product-list') productListComponent : ProductListComponent 
 
   OnSearchTextChanged(value: string) {

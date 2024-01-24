@@ -14,3 +14,11 @@ Template Referencing used above will only be available on button click, but what
   Task: A pop-up showing product details when product is clicked
   We created product-details component inside container, then inside product-list component, on click, assign selectedProduct object with product, container component will be able to access product-list using viewchild, then pass on this viewchild element reference from container to child product-details wherein it is assigned to product object. This product object is rendered in HTML pop-up.
   When a view child reference is passed from parent to another child object, access it inside ngOnInIt() as this reference won't have value before that. This is because child reference constructor gets initialized before parent reference constructor.  
+
+
+ViewChildren:
+For ViewChild, only first element matching reference is returned. Return type is ElementRef. It will be a single element.
+True to resolve query results before change detection runs, false to resolve after change detection. Defaults to false.
+For ViewChildren, all the elements matching reference is returned. Return type is QueryList<ElementRef>. It will be an array so need to iterate
+ over it. This gets assigned on change detection cycle, so under ngOnInit, it will be undefined.
+ @ViewChildren ('inputEl', {}) inputElementRef : QueryList<ElementRef>;

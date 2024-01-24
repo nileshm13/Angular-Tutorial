@@ -1,0 +1,10 @@
+<p> NG -TEMPLATE </p>
+
+<ng-template #myTemplate>
+    <p>Using an ng-template in html does not mean it wil get rendered, it just means a template has been created and user
+        is free to use this template anywhere in the code.</p>
+    <p>In order to use this template, we need to add a template reference (using #) to ng-template
+        and then define "div *ngTemplateOutlet = "myTemplate" wherever the template #myTemplate is to be used</p>
+</ng-template>
+
+<div *ngTemplateOutlet="myTemplate"></div>
