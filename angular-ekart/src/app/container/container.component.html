@@ -1,8 +1,34 @@
-<app-search (searchTextChanged) = "OnSearchTextChanged($event)"></app-search>
-<product-list [searchText] = "searchText" #productListComponent></product-list>
-<!-- Created a component based reference for product-list and utilized below so that product-details which is a pop-up gets shown only when 
+<div>
+    <app-search (searchTextChanged)="OnSearchTextChanged($event)"></app-search>
+
+    <product-list [searchText]="searchText" #productListComponent></product-list>
+    <!-- Created a component based reference for product-list and utilized below so that product-details which is a pop-up gets shown only when 
 selected product has a value.
 Selected product will have a value on clicking product. -->
-<product-details *ngIf="productListComponent.selectedProduct" [productListComp]="productListComponent"></product-details>
-<app-ng-template-example *ngIf="showNgTemplate"></app-ng-template-example>
-<app-ng-container-example *ngIf="showNgContainer"></app-ng-container-example>
+    <product-details *ngIf="productListComponent.selectedProduct"
+        [productListComp]="productListComponent"></product-details>
+
+    <!-- Featured Product section -->
+    <div class="ekart-featured-products">
+        <div class="ekart-featured-product-heading">
+            <h1>Latest arrival in popular brands</h1>
+        </div>
+
+        <featured-brands>
+            <h3 class="title">New Arrivals in Nike</h3>
+            <button class="call-to-action">Learn More about Nike</button>
+        </featured-brands>
+        <featured-brands>
+            <h3 class="title">New Arrivals in Adidas</h3>
+            <button class="call-to-action">Learn More about Adidas</button>
+        </featured-brands>
+        <featured-brands>
+            <h3 class="title">New Arrivals in Reebok</h3>
+            <button class="call-to-action">Learn More about Reebok</button>
+        </featured-brands>
+    </div>
+    <!-- Just for conceptual understanding -->
+    <app-ng-template-example *ngIf="showNgTemplate"></app-ng-template-example>
+    <app-ng-container-example *ngIf="showNgContainer"></app-ng-container-example>
+
+</div>

@@ -1,0 +1,9 @@
+Selectors are defined as HTML tag, any content that goes between these tags does not get displayed
+eg: <product-list> This will not get displayed </product-list>
+
+If we want to display such content, we make use of ng-content. Content projection is a way of passing "HTML content" from parent component to child component. If we specify multiple ng-content in child, only the last one gets replaced by data.
+Consider a sceanrio, on a web page, we want to display 3 card items which have same HTML design but content inside them is different (see featured-brands component). We can pass the HTML details from web page component (parent) to cards component (child) eg: From container component to featured component in our case. Lets say each card has a header, body and footer. We can define unique headers and footer in parent component and in child component, replace header and footer with ng-content.
+Q. Now the question arises, how would child component know which ng-content is header and which is footer. 
+Ans: For this, along with ng-content, define header class for header and footer class for footer like (in featured-brands):
+<ng-content select = ".title"></ng-content>
+<ng-content select = ".call-to-action"></ng-content>
