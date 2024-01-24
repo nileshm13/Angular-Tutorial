@@ -14,6 +14,7 @@ import { FilterComponent } from './container/product-list/filter/filter.componen
 import { ProductDetailsComponent } from './container/product-details/product-details.component';
 import { NgTemplateExampleComponent } from './container/ng-template-example/ng-template-example.component';
 import { NgContainerExampleComponent } from './container/ng-container-example/ng-container-example.component';
+import { FeaturedBrandsComponent } from './container/featured-brands/featured-brands.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NgContainerExampleComponent } from './container/ng-container-example/ng
     FilterComponent,
     ProductDetailsComponent,
     NgTemplateExampleComponent,
-    NgContainerExampleComponent
+    NgContainerExampleComponent,
+    FeaturedBrandsComponent
   ],
   imports: [
     BrowserModule,
