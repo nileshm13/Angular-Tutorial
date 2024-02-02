@@ -12,3 +12,10 @@ export class setBackground
 When a directive is assigned to a template element, reference of that element gets passed on to the constructor of directive as a parameter. User can manipulate the element as a template reference variable by using it.
 
 Directive must be declared in the declarations array
+
+Renderer2:
+Direct DOM Manipulation has security risks (see img Why Renderer2)
+Renderer2 allows us tom manipulate DOM without accessing DOM elements directly, it provides a layer of abstraction between DOM Elements and component code.
+It has lots of pre-defined classes that allow you to update DOM Elements.
+Access Renderer2 class as a parameter in constructor.
+constructor(private element: ElementRef, private renderer: Renderer2) --> this creates a private variable name element of type ElementRef and assigns whatever value gets injected(template reference variable), this removes the need of declaration above and assingment done inside constructor.
