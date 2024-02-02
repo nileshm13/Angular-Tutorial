@@ -29,3 +29,8 @@ HostBinding;
 @HostBinding('style.backgroundcolor') backgroundClr : string = 'white'
 Host Binding binds host element property(element on which the directive is added) to the property of a component/directive class.
 can manipulate like this.backgroundClr = 'red' on mouseover/mouseleave.
+
+Property Binding in Directives:
+Dynamically assign values to renderer instance by declaring color/backgroundColor text as angular properties. Decorate them with @Input and use them with square brackets in the DOM where directive is assigned.  
+If the same property is avaiable in directive and as an attribute of DOM element (eg: title), angular looks for the property of directive first and assigns it. If no match found, it looks if an attribute exists for DOM (eg: is title a valid attribute for span), if yes, it assigns it.
+
