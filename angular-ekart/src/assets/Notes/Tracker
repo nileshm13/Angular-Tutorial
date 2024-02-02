@@ -1,2 +1,9 @@
 Video 49: HostListener
 Adding highlight to a product, so product zooms in when mouse hovers on it and zooms out when mouse is outside product
+
+Video 50: HostBinding
+Changing the color of Add To Cart button, its text and border when mouse hovers on it and outisde of it, by binding style.styleName and assigning a value to it.
+(V49 and V50 checked in -> HostListener and HostBinding in Angular)
+
+Video 52:
+Dynamically assigning properties to renderer2 instance by creating property with @Input. Assign it in template using property binding. 
