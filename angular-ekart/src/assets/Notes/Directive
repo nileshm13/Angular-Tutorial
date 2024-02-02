@@ -1,0 +1,14 @@
+Directive:
+Angular directive gets assigned as an attribute to a template element.
+It has filename as SetBackground.directive.ts
+
+Directive class needs to be decorated with @Directive attribute and selecto should specify name in square brackets like:
+@Directive
+export class setBackground 
+(
+    selector: [setBackground]
+){}
+
+When a directive is assigned to a template element, reference of that element gets passed on to the constructor of directive as a parameter. User can manipulate the element as a template reference variable by using it.
+
+Directive must be declared in the declarations array

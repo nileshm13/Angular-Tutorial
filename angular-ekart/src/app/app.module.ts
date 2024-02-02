@@ -15,6 +15,7 @@ import { ProductDetailsComponent } from './container/product-details/product-det
 import { NgTemplateExampleComponent } from './container/ng-template-example/ng-template-example.component';
 import { NgContainerExampleComponent } from './container/ng-container-example/ng-container-example.component';
 import { FeaturedBrandsComponent } from './container/featured-brands/featured-brands.component';
+import { SetBackground } from './container/CustomDirectives/SetBackground.directive';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FeaturedBrandsComponent } from './container/featured-brands/featured-br
     ProductDetailsComponent,
     NgTemplateExampleComponent,
     NgContainerExampleComponent,
-    FeaturedBrandsComponent
+    FeaturedBrandsComponent,
+    SetBackground
   ],
   imports: [
     BrowserModule,
