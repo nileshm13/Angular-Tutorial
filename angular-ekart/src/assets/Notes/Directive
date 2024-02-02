@@ -1,4 +1,5 @@
 Directive:
+CLI cmd: ng g d SetBackground
 Angular directive gets assigned as an attribute to a template element.
 It has filename as SetBackground.directive.ts
 
@@ -19,3 +20,12 @@ Renderer2 allows us tom manipulate DOM without accessing DOM elements directly, 
 It has lots of pre-defined classes that allow you to update DOM Elements.
 Access Renderer2 class as a parameter in constructor.
 constructor(private element: ElementRef, private renderer: Renderer2) --> this creates a private variable name element of type ElementRef and assigns whatever value gets injected(template reference variable), this removes the need of declaration above and assingment done inside constructor.
+
+HostListener:
+Using host-listener, we can listen to an event on host element(like div, p, etc) and react to that event by writing an event handling function(like mouseout, mouseenter, etc). This event handler can have custom code like zooming element, etc.
+@HostListener('mouseenter') OnMouseEnter() {} 
+
+HostBinding;
+@HostBinding('style.backgroundcolor') backgroundClr : string = 'white'
+Host Binding binds host element property(element on which the directive is added) to the property of a component/directive class.
+can manipulate like this.backgroundClr = 'red' on mouseover/mouseleave.
