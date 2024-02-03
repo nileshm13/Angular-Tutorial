@@ -10,3 +10,37 @@ Observable is based on Observable Pattern which consists of (see img Observable/
 3. Handler -> Event handler based on subscription of data -> It performs event handing based on type received like next/error/completion
 
 Once an observable emits an error, it cannot emit any value after that. Same happens for complete method.
+
+Creating an observable:
+//This will stream array of data 1-5
+let obs = new Observable((observer) => {
+    observer.next([1,2,3,4,5]); 
+})
+
+Subscribing to this observable (old way):
+this.obs.subscribe((val)=>
+{
+    this.data = val;    //next (fetching data that is getting streamed)
+},
+(err)=>{
+    alert(err); //Error Handling
+},
+()=>{
+    console.log('Observable fetch completed');  //Observable has completed its subscription for stream
+});
+
+Subscribing to this observable (new way):
+//create an object {} inside subscibe and then write a method for each of 3 (next, error and complete)
+this.obs.subscribe({
+    next: (val) => {
+        this.data.push(val)
+    },
+    error(err)
+    {
+        alert(err);
+    }
+    complete(){
+        console.log("fetch completed");
+    }
+}
+)
