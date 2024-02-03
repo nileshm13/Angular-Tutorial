@@ -1,3 +1,4 @@
 Helps to follow DRY principle
 Component code is for handling UI logic, Services is where we write business logic. It is where we write logic that needs to be re-used across multiple components in application
-It can alos be used to pass data between two unrelated components.
+It can also be used to pass data between two unrelated components.
+Services are injected using Dependency Injection. DI is a design pattern by which class receives its dependencies from an external source rather than creating it themselves.
