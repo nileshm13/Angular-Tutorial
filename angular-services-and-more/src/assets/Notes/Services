@@ -24,3 +24,17 @@ Injecting a service into another service:
 1. In the constructor of the service, add instance of the service that is to be injected
 2. Decorate the service with @Injectable() decorator, it tells the angular that this service injects another service.
 3. Register the service class at appropriate place (ideally in module)
+
+Passing data between sibling components using services:
+In service class, create a variable of type EventEmitter<customType>, then, create a method which emits this variable. Also, have this method accept a parameter.
+In first component, call the method above and pass the data in argument.
+In second component, subscribe to the eventEmitter data and assign it to the variable. Use this variable for rendering.
+Summary: First component sent the data to service method, this method emitted an eventEmitter, second component subscribed to this eventEmitter to get data sent from first component.
+
+A new way to inject service in an Angular component is(from Angular 14):
+private userService =  inject('UserService'); 
+
+Instead of providing Services in providers array of app.module, we can also write a service like:
+@Injectable({
+    providedIn : 'root'
+})
