@@ -1,3 +1,17 @@
 <top-header></top-header>
-<app-header></app-header>   <!--view template of app-header gets displayed-->
+<app-header></app-header> <!--view template of app-header gets displayed-->
 <app-container></app-container>
+
+<!-- Custom class and style directive -->
+<h2> Custom Class and Directive (Implementing something like ngClass and ngStyle but Custom)
+    <div [customDesignClass]="{appContainer:true, appHighlight: true, appFont: true}">
+        <!-- If a class name has a hyphen, we need to assign it inside '' like 'app-Container': true -->
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+    </div>
+
+    <div [customDesignStyle]="{backgroundColor: active ? 'red':'green', color: active? 'white' : 'yellow', margin: '20px 50px', padding: '10px 20px', 'font-size': '18px' , border: '#28282B 3px solid'}">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+    </div>
+</h2>
