@@ -13,6 +13,7 @@ import { UserDetailComponent } from './header/admin/user-detail/user-detail.comp
 import { SubscriptionService } from './Services/Subsciption.service';
 import { UserService } from './Services/user.service';
 import { LoggerService } from './Services/logger.service';
+import { ObservablesComponent } from './observables/observables.component';
 
 export const USER_TOKEN = new InjectionToken<UserService>('USER_SERVICE_TOKEN');
 // USER_TOKEN is unique identifier which will be assigned to provide in providers Array
@@ -28,6 +29,7 @@ export const USER_TOKEN = new InjectionToken<UserService>('USER_SERVICE_TOKEN');
     SidebarComponent,
     UserListComponent,
     UserDetailComponent,
+    ObservablesComponent,
   ],
   imports: [
     BrowserModule,

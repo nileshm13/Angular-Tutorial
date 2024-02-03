@@ -1,0 +1,12 @@
+Promise is a JS Concept however Observable is provided by RxJS library.
+
+For processing large amount of data aynchronously, the data is divided into data streams (Consider 1 GB data transfer divided into 10 packets of 100 MB each). These 10 packets are called stream of data.
+
+Observable is a function that converts ordinary stream of data into an Observable one i.e. its a wrapper around stream of data.
+
+Observable is based on Observable Pattern which consists of (see img Observable/.png and Promise vs Observable.png):
+1. Observable -> Event Emitter (emits the data) -> It sends next/error/completion event
+2. Observer -> Event Listener / Subscriber (listens to data) -> it subscribes to event sent by observable
+3. Handler -> Event handler based on subscription of data -> It performs event handing based on type received like next/error/completion
+
+Once an observable emits an error, it cannot emit any value after that. Same happens for complete method.
