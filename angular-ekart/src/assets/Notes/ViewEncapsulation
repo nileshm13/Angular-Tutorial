@@ -1,0 +1,18 @@
+Its a mechanism is angualr due to which a CSS applied to a component only gets applied to that component, does not affect any other component.
+
+There are 3 types of view encapsulations in angular, this can be assigned in a component similar to selector/stylesUrl:
+ViewEncapsulation.None
+ViewEncapsulation.Emulated
+ViewEncapsulation.ShadowDOM
+
+@Component({
+    encapsulation: ViewEncapsulation.ShadowDOM
+})
+
+Consider we create two child components (child1 and child2) of app-component:
+
+1. By default, angular uses Emulated. Here, angular creates a unique attribute and assigns to each element of a cmp, so each element of app-component will have an attribute like _ngContent-cl101, child componenents will have different like _ngContent-cl102,_ngContent-cl103. When we specify css for a button in child 1, angular actually applies it as  button[_ngContent-cl102] {} so that its specific to it.
+
+2. ViewEncapsulation.None means it does not create a unique attribute for different component, so CSS specified for one component's element gets applied to all other component's element as well.
+
+3. ViewEncapsulation.ShadowDOM means it creates a shadow DOM which renders separately to main DOM, consider this like a private DOM. Due to this, any CSS applied in styles.css does not get applied to a component having ViewEncapsulation.ShadowDOM specified.

@@ -1,0 +1,13 @@
+Acts like a normal switch case, ngSwitchCase is property binded and each case acts as a structural attirbute with *
+Syntax:
+
+<div [ngSwitchCase]="tab"> //tab is a property which defines current tab
+    <div *ngSwitchDefault="'Mobiles'">  //Default case that gets executed on page load
+    </div>
+    <div *ngSwitchCase="'Tablets'">
+    </div>
+    <div *ngSwitchCase="'Laptops'">
+    </div>
+    <div *ngSwitchCase="'Computer'">
+    </div>
+</div>
