@@ -42,3 +42,5 @@ This allows attribute to work based on a condition. For this, we add input prope
 @Input() set disableProduct(disable){
     if(disable){ //logic here }
 }
+
+Custom Style and Class Directive: (See checkin Custom class and style)
