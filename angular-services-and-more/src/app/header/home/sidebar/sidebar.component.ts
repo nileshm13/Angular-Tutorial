@@ -3,8 +3,7 @@ import { SubscriptionService } from 'src/app/Services/Subsciption.service';
 
 @Component({
   selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  providers: [SubscriptionService] //What to provide, like list of services that need to be injected in this class
+  templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent {
   type: string = 'My Site for a month';

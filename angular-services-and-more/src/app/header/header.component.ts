@@ -3,8 +3,7 @@ import { SubscriptionService } from '../Services/Subsciption.service';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  providers: [SubscriptionService] //What to provide, like list of services that need to be injected in this class
+  templateUrl: './header.component.html'  
 })
 export class HeaderComponent {
   selectedTab: string = 'home';
