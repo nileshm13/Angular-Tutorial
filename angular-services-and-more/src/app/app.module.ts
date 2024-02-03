@@ -13,6 +13,7 @@ import { UserDetailComponent } from './header/admin/user-detail/user-detail.comp
 import { SubscriptionService } from './Services/Subsciption.service';
 import { UserService } from './Services/user.service';
 import { LoggerService } from './Services/logger.service';
+import { ObservablesComponent } from './observables/observables.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoggerService } from './Services/logger.service';
     SidebarComponent,
     UserListComponent,
     UserDetailComponent,
+    ObservablesComponent,
   ],
   imports: [
     BrowserModule,
