@@ -15,3 +15,6 @@ When a dependency is provided on root component, same instance is injected acros
 
 Module Injector:
 Here, dependency is injected in the module, eg: inside the providers array of app.module.ts This leads to same instance of Service being available throughout the angular application leading to Singleton pattern implementation.
+
+Possible bug due to Dependency override:
+Lets say we have 2 components, create-users (form to create a new user) and users-list (child cmp of create-users, used to display users list). Now, in create-users, we call createUsers mtd of Userservice to add users and in users-list we call getAllUsers mtd of Userservice to get users. Although, the users list will be updated by create-users cmp, there is a different instance providing data back to users-list, hence newly added user won't reflect in users-list.
