@@ -1,0 +1,3 @@
+Helps to follow DRY principle
+Component code is for handling UI logic, Services is where we write business logic. It is where we write logic that needs to be re-used across multiple components in application
+It can alos be used to pass data between two unrelated components.
