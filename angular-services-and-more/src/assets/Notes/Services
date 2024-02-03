@@ -3,6 +3,7 @@ Component code is for handling UI logic, Services is where we write business log
 It can also be used to pass data between two unrelated components.
 Services are injected using Dependency Injection. DI is a design pattern by which class receives its dependencies from an external source rather than creating it themselves.
 In constructor of a class, add an instance of the service. Alos, provide the class name in the providers array, this needs to be set similar to how stylesUrl gets set. By this approach, when we provide a service on multiple components, each component gets it own instance of that service.
+It is a good practice to decorate your service with @Injectable()
 
 Hierarchical DI:
 A service injected in parent component gets reused in all of its child components. For this, do not specify class name in providers array of any child components.
@@ -18,3 +19,8 @@ Here, dependency is injected in the module, eg: inside the providers array of ap
 
 Possible bug due to Dependency override:
 Lets say we have 2 components, create-users (form to create a new user) and users-list (child cmp of create-users, used to display users list). Now, in create-users, we call createUsers mtd of Userservice to add users and in users-list we call getAllUsers mtd of Userservice to get users. Although, the users list will be updated by create-users cmp, there is a different instance providing data back to users-list, hence newly added user won't reflect in users-list.
+
+Injecting a service into another service:
+1. In the constructor of the service, add instance of the service that is to be injected
+2. Decorate the service with @Injectable() decorator, it tells the angular that this service injects another service.
+3. Register the service class at appropriate place (ideally in module)
