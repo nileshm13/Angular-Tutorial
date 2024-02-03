@@ -1,4 +1,17 @@
-Helps to follow DRY principle
-Component code is for handling UI logic, Services is where we write business logic. It is where we write logic that needs to be re-used across multiple components in application
+Helps to follow DRY principle.
+Component code is for handling UI logic, Services is where we write business logic. It is where we write logic that needs to be re-used across multiple components in application.
 It can also be used to pass data between two unrelated components.
 Services are injected using Dependency Injection. DI is a design pattern by which class receives its dependencies from an external source rather than creating it themselves.
+In constructor of a class, add an instance of the service. Alos, provide the class name in the providers array, this needs to be set similar to how stylesUrl gets set. By this approach, when we provide a service on multiple components, each component gets it own instance of that service.
+
+Hierarchical DI:
+A service injected in parent component gets reused in all of its child components. For this, do not specify class name in providers array of any child components.
+
+Dependency Override:
+When same service in injected in parent and child, the service of child component overrides the service of parent component
+
+Root Injection: 
+When a dependency is provided on root component, same instance is injected across all other components, directives and services.
+
+Module Injector:
+Here, dependency is injected in the module, eg: inside the providers array of app.module.ts This leads to same instance of Service being available throughout the angular application leading to Singleton pattern implementation.
