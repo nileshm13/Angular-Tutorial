@@ -37,3 +37,8 @@ If the same property is avaiable in directive and as an attribute of DOM element
 2. Define an input property with an alias same as selector name. Create an object which holds 2 properties, backgroundColor and textColor for example. Assign this object in a syntax similar to ngClass in html like [directive] = "{prop1: 'val1', prop2: 'val2'}".
 See checkin (Directive Property Binding - 2)
 
+Conditional Attribute Directive:
+This allows attribute to work based on a condition. For this, we add input property with same name as directive and use a set keyword with that property. This allows the property to be accessed as a method and write a functional logic inside it. This property can also receive a value by property binding directive and passing value same as we do for parent child data transfer. Set can accept one parameter.
+@Input() set disableProduct(disable){
+    if(disable){ //logic here }
+}
