@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, filter, from, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-observables',
@@ -8,7 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class ObservablesComponent {
   data: any[] = [];
+  showContent: string = 'rxjs';
+  val1: string[] = ['Angular', 'Vue', 'JavaScript', 'React'];
+  val2: number[] = [10, 20, 30, 40, 50, 60]
 
+  //#region  Observable
   //Observable
   sampleOservable = new Observable((observer) => {
     observer.next([1, 2, 3, 4, 5]);
@@ -39,7 +43,6 @@ export class ObservablesComponent {
     setTimeout(() => { observer.next(5) }, 5000);
     setTimeout(() => { observer.complete() }, 6000);
   });
-
 
   getData() {
     //Observer
@@ -82,5 +85,77 @@ export class ObservablesComponent {
       }
     });
   }
+  //#endregion
 
+  //#region rxjs
+  getAsyncData() {
+    this.data = [];
+    //of operator
+    // let rxjsObs = of(this.val1, this.val2, 10, 20, true, 'Raj' , ['Test','User']);
+    // rxjsObs.subscribe((val: any)=>
+    // {
+    //   this.data.push(val);
+    // })
+
+    //from operator
+    // let rxjsObs = from(this.val2);
+    // rxjsObs.subscribe((val: any) => {
+    //   this.data.push(val);
+    // });
+
+    //Convert promise to observable
+    // let dataPromise = new Promise((resolve, reject) => {
+    //   resolve(this.val1);
+    // });
+
+    // dataPromise.then((val) => {
+    //   console.log(val);
+    //   this.data.push(val);
+    //   console.log(this.data);
+    // })
+
+    // console.log(this.data);//this is undefined as promises are async in nature so this line gets executed before data assignment takes place above in .then
+
+    //CONVERT
+    // let rxjsObs = from(dataPromise) //can be done in a single line as well
+    // rxjsObs.subscribe((val: any) => {
+    //   this.data = val;
+    // });
+
+    //Map
+    // let rxjsObs = from(this.val2).pipe(map((value: any) => {
+    //   console.log(value);
+    //   return value * 10;
+    // }));
+
+    // rxjsObs.subscribe((ob: any) => {
+    //   this.data.push(ob);
+    // });
+
+    //filter
+    // let rxjsObs = from(this.val2).pipe(filter((value: any) => {
+    //   return value%4 === 0;
+    // }));
+
+    // rxjsObs.subscribe((ob: any) => {
+    //   this.data.push(ob);
+    // });
+
+    //pipe:
+    from(this.val2).pipe(map((val) => {
+      return val * 10;
+    }),
+      filter((res) => {
+        return res % 6 === 0;
+      })
+    ).subscribe((result: any) => {
+      this.data.push(result);
+    }, (err) => {
+      console.log("Something went wrong, Error: " + err);
+    },
+      () => {
+        alert('data fetch completed');
+      })
+  }
+  //#endregion
 }

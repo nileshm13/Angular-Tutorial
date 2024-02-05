@@ -1,0 +1,34 @@
+of operator:
+It streams data one after the other and then emits a complete signal. Converts a data to an observable.
+Any amount of data can be passed as an argument, eg: Of(this.array1 ->int array, this.array2 ->string array, 10,20, 'Hello', true);
+
+from operator:
+Takes a single argument which can be iterated and returns an observable. If a string is passed like '12345', each of 1,2,3,4,5 gets printed
+separately. from is the preferred way of converting a promise to an observable. 
+from([1,2,3,4,5])
+var samplePromise = new Promise((resolve,reject)=> {
+     resolve([1,2,3,4,5])
+     });
+     var obs = from(samplePromise);
+
+from vs of:
+'from' reads an array data one by one and converts it to an observable whereas 'of' takes entire array and converts to an observable.
+
+fromEvent:
+Listens to an event and allows to convert that event to an observable (create an observable from a DOM event), for eg: listen to a button click event and on button click, create an observable that adds a div or any other operations. It takes 2 arguments, element on which event is happening  and the event on which observable should be created.
+fromEvent(this.element.nativeElement, 'click').subsribe()
+For code example, see video 73.
+
+map and filter:
+map is used to transform the data returned by an observable
+filter is used to filter data based on condition specified
+pipe needs to be applied to an observable before adding map or filter operator.
+Each of map and from are a function which accepts callback as an argument
+
+obs.pipe(map((val)=>{
+     return val*5;     
+}))
+
+pipe:
+It needs to be applied after observer name in order to use filer and map.
+It is used for chaining multiple rxJs operator together, so we can add map,filter one after the other.
