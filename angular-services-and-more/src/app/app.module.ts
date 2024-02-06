@@ -14,6 +14,10 @@ import { SubscriptionService } from './Services/Subsciption.service';
 import { UserService } from './Services/user.service';
 import { LoggerService } from './Services/logger.service';
 import { ObservablesComponent } from './observables/observables.component';
+import { NewTaskComponent } from './new-task/new-task.component';
+import { ShowTaskComponent } from './show-task/show-task.component';
+import { SubjectTaskComponent } from './subject-task/subject-task.component';
+import { SubjectTypesComponent } from './subject-types/subject-types.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,9 @@ import { ObservablesComponent } from './observables/observables.component';
     UserListComponent,
     UserDetailComponent,
     ObservablesComponent,
+    NewTaskComponent,
+    ShowTaskComponent,    
+    SubjectTaskComponent, SubjectTypesComponent,
   ],
   imports: [
     BrowserModule,

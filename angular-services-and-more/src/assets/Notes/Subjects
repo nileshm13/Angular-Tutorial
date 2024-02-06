@@ -1,0 +1,33 @@
+Subject:
+A subject is used to cast an observable to many other observers.
+It can help in cross component communication between sibling components, instead of using event emitter in service class, make use of subject type.
+As subject is a type of an observable, we need to use next() with a subject to complete it.
+
+Subject vs Observable:
+A subject is a mutlicast whereas an observable is a unicast, so for a random no generator, subscribing to an observable may give different result but subject always give same result. 
+An observer always provides data whereas a subject can provide as well consume data.
+For an api call, if we subscribe using observable 3 times, it will call the api 3 times instead we can subscribe once and assign value to subject, then then wherever this data is needed, assign the value of subject.
+(see subject.component.ts) 
+
+Types of Subjects: (see subject-types.compenent.ts)
+1. A normal subject does not have a default value. eg: let subj = new Subject();
+2. When it is subscribed, it waits for subject.next to emit the value, as soon as value is emitted after the subscription line, it gets the value. 
+3. Any value emitted before the first subscription is ignored.
+
+BehaviorSubject:    eg: let subj = new BehaviorSubject(1500);
+1. It is similar to a subject but has a default value.  eg: let subj = new BehaviorSubject(100);
+2. A BehaviourSubject has an initial value that gets emitted if no new value is emitted. It emits an initial value or last emitted value for a new subscriber.
+3. As BehaviourSubject has an initial value, it gets printed as soon as there is first subscription for data, it does not wait for next to emit the data.
+4. If a BehaviorSubject emits a value and there is subscription after that, it gets the most recent value not the default one.
+
+ReplaySubject:      eg: let subj = new ReplaySubject();
+1. It maintains history of all the emitted values in a buffer which gets assigned on each subscription.
+2. So, if 5 different values are emitted by a ReplaySubject, and then comes the first subscription, it will get all 5 values.
+3. It has 2 params, ReplaySubject(bufferSize //how many previous values need to be kept in buffer, windowTime //how long in ms should buffer values be kept)
+4. Default value for bufferSize and windowTime is infinity //(See img for description)
+
+AsyncSubject:
+1. An async subject assigns a value only after a complete is called on it.
+2. Any subscription before that will not get a value
+3. Any value emitted after complete call will be ignored, so the last emitted value before a complete call gets assigned to subscription
+4. Unlike other subjects, next won't call all the places where subsciption has taken place before complete, so assignment in only on a single line
