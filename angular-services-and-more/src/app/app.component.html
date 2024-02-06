@@ -1,7 +1,14 @@
-<div class="main-container" *ngIf = "showContent === 'services'">
+<div class="main-container" *ngIf="showContent === 'services'">
   <app-header></app-header>
 </div>
 
-<div *ngIf = "showContent === 'observables'">
+<div *ngIf="showContent === 'observables'">
   <app-observables></app-observables>
+</div>
+
+<div *ngIf="showContent === 'subjects'">
+  <app-new-task></app-new-task>
+  <app-show-task></app-show-task>
+  <app-subject-task></app-subject-task>
+  <app-subject-types></app-subject-types>
 </div>
