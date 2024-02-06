@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-services-dependency-injection';
   // showContent: string  = 'services';
-  showContent: string  = 'subjects';
+  showContent: string  = 'observables';
 }

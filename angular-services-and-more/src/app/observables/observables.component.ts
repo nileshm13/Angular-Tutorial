@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, filter, from, map, of } from 'rxjs';
+import { Observable, filter, from, interval, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-observables',
@@ -8,9 +8,11 @@ import { Observable, filter, from, map, of } from 'rxjs';
 })
 export class ObservablesComponent {
   data: any[] = [];
-  showContent: string = 'rxjs';
+  showContent: string = 'observable';
   val1: string[] = ['Angular', 'Vue', 'JavaScript', 'React'];
   val2: number[] = [10, 20, 30, 40, 50, 60]
+  resultSet: number[] = [];
+  sub1;
 
   //#region  Observable
   //Observable
@@ -85,6 +87,18 @@ export class ObservablesComponent {
       }
     });
   }
+
+  SubscribeData() {
+    var noSets = interval(1000); //generates a number every 1 sec, return type is observable
+
+    this.sub1 = noSets.subscribe((val) => {
+      this.data.push(val);
+    })
+  }
+
+  UnSubscribeData() {
+    this.sub1.unsubscribe();
+  }
   //#endregion
 
   //#region rxjs
@@ -157,5 +171,6 @@ export class ObservablesComponent {
         alert('data fetch completed');
       })
   }
+
   //#endregion
 }
