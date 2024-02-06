@@ -1,9 +1,9 @@
 <div class="container" *ngIf="showContent === 'observable'">
   <h2>Observables in Angular</h2>
-  <div class="data-list" *ngFor="let x of data">
-    {{ x }}
-  </div>
-
+  <button (click)="SubscribeData()">Subscribe</button>
+  <br>
+  <button (click)="UnSubscribeData()">UnSubscribe</button>
+  <br>
   <button (click)="getData()">Get Data</button>
   <br>
   <button (click)="getStreamData()">Get Stream Data</button>
@@ -11,6 +11,10 @@
   <button (click)="getErrorData()">Get Stream Data</button>
   <br>
   <button (click)="getCompleteData()">Get Stream Data</button>
+
+  <div class="data-list" *ngFor="let x of data">
+    {{ x }}
+  </div>
 </div>
 
 <div class="container" *ngIf="showContent === 'rxjs'">
