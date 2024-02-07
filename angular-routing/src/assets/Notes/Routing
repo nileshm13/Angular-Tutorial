@@ -1,0 +1,15 @@
+Routing:
+1. For routing, first define a routes array of type Routes which is imported from library @angular/router.
+2. Register that route in imports array using Router.ForRoot(routes), ForRoot here specifies the routes specified in array are for entire application
+3. Each array element contains 2 properties, path and component
+4. If we want to redirect to a component, specify like {path: '', redirectTo: 'Home', pathMatch: 'full'}, this means when a default route is reached(localhost:4200 in our case), redirect to HomeComponenet's url (localhost:4200/Home)
+5. ** is a wild card route which matches every route path, so if no matching route found, the component specified for wild card route gets called. Wild card routes must be specified at the end of all predefined routes else wild card route will get called instead of actual specified route.
+6. Specify <router-outlet></router-outlet> in app-component to tell angular that this is a dynamic component and it will show different component based on which route gets matched. Generally we specify it between header and footer so that those remain constant whil middle section of the page changes.
+
+RouterLink:
+1. In order to integrate routing with <a> tag i.e. for redirection when clicked on navigation link, we make use of routerLink
+2. routerLink is a directive that binds HTML element to a route. When the HTML element on which we have used routerLink is clicked, it results in navigation to that route.
+3. routerLink is an attribute directive so we can pass additional parameters to it.
+4. <a routerLink = "Home">HomePage</a> --> When HomePage is clicked on navigation bar, find route that matches Home and navigate to its component
+5. As its an attribute, we can specify it in square brackets, but it will expect a ts expression, hence define the route in single quote like: <a [routerLink] = "'Home'">HomePage</a>
+6. When link is specified using anchor tag, the page reloads on every navigation resulting in all css/other files getting fetched time and again, with routerLink, only the view changes and only new files gets asked from server resulting in an SPA beaviour and less load on every request.
