@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ServicesService } from './Services/services.service';
 import { HomeComponent } from './home/home.component';
@@ -21,9 +21,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { FormsModule } from '@angular/forms';
 
-
-
-
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  // { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'courses', component: CoursesComponent },
+  { path: '**', component: NotFoundComponent }
+]
 
 @NgModule({
   declarations: [
@@ -46,7 +52,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes) //registering routes at application level
   ],
   providers: [ServicesService, CourseService],
   bootstrap: [AppComponent]

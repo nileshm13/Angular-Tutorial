@@ -133,4 +133,10 @@ h2{
   }
 }
 
+.active-route{
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
+  /* Check why this color does not change */
+}
 

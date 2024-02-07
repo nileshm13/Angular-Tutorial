@@ -8,11 +8,11 @@
     </ul>
   </div>  
   <div class="page-header-secondary-nav">
-    <a href="#">SEARCH</a>
-    <a href="#">POPULAR</a>
-    <a href="#">TESTIMONY</a>
-    <a href="#">SERVICES</a>
-    <a href="#">CONTACT</a>
+    <a routerLink="Home" fragment="search">SEARCH</a>
+    <a routerLink="Home" fragment="courses">POPULAR</a>
+    <a routerLink="Home" fragment="testimony">TESTIMONY</a>
+    <a routerLink="Home" fragment="services">SERVICES</a>
+    <a routerLink="Home" fragment="contact">CONTACT</a>
   </div>
 </div>
 <div class="page-header">
@@ -26,14 +26,15 @@
       </div>      
       <div class="page-header-primary">
         <div class="page-header-primary-nav">
-            <a href="#">HOME</a>
-            <a href="#">ABOUT</a>
-            <a href="#">CONTACT</a>
-            <a href="#">COURSES</a>
+            <a routerLink="" [routerLinkActive]="'active-route'" [routerLinkActiveOptions]="{exact: true}">HOME</a>       
+            <!-- As its an attribute, we can specify it in square brackets, but it will expect a ts expression, hence define the route in single quot      -->
+            <a [routerLink]="'about'" [routerLinkActive]="'active-route'" [routerLinkActiveOptions]="{exact: true}">ABOUT</a> 
+            <a routerLink="contact" [routerLinkActive]="'active-route'" [routerLinkActiveOptions]="{exact: true}">CONTACT</a>
+            <a routerLink="courses" [routerLinkActive]="'active-route'" [routerLinkActiveOptions]="{exact: true}">COURSES</a>
         </div>
         <div class="page-header-login-logout">
-            <a href="#">LOGIN</a>
-            <a href="#">LOGOUT</a>
+            <a routerLink="/login">LOGIN</a>
+            <a routerLink="/login">LOGOUT</a>
         </div>
       </div>
       
