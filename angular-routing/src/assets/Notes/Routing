@@ -23,11 +23,25 @@ If we use routerLink = '/python', it will search and redirect to route : localho
 If we use routerLink = 'python', it will search and redirect to route : localhost:4200/courses/python
 
 While specifying routing in router.module.ts, we use relative path, still it acts as absolute, why? Eg: If we navigate to home component and then to courses component, it gives localhost:4200/courses not localhost:4200/home/courses
-A: This is because relative is wrt current component as well, when we are in home component and routerlink is specified in its html, it will take current route and append to it, but when we are in router.module.ts, it is not any component but a module, so relativity is wrt root url i.e. localhost:4200
+A: This is because it is relative to current url, when we are in home component and routerlink is specified in its html, it will take current route and append to it, but when we are in router.module.ts, it is not any component but a module so relativity is wrt root url i.e. localhost:4200
 
 routerLinkActive and routerLinkActiveOptions:
 1. routerLinkActive is used to specify CSS classes for active link so that it stands out from other links in navigation.
 [routerLinkActive]="'active-route'" -> active-route is the css class
 2. The only problem is it will highlight all the parent routes as well. So if routerLinkActive is specified for localhost:4200/courses/python, it will apply css class for both links localhost:4200/courses and localhost:4200/courses/python . in order to solve this issue, we have another attribute [routerLinkActiveOptions]="{exact: true}" which ensures exact route is only marked as active.
  
+navigate, navigateByUrl and activatedRoute:
+
+//Its absolute. It accepts an array where we specify each route to be navigated so for localhost:4200/courses/python/3.5 , we specify this.route.navigate(['courses','python','3.5']); 
+// this.route.navigate(['courses']);
+// this.route.navigate(['courses','python','3.5']);
+
+ //Its absolute. It accepts a string where we specify the link to be directed to, so for localhost:4200/courses/python/3.5 , we specify this.route.navigateByUrl('courses/python/3.5');
+//this.route.navigateByUrl('courses');
+//this.route.navigateByUrl('courses/python/3.5');
+
+//Both of above are absolute in nature by default but we can use navigateByUrl and provide relativeTo to provide redirection relative to a current url
+//relativeTo accepts type activatedRoute which specifies current url.
+//To get current url, use ActivatedRoute --> currentURL: ActivatedRoute = inject(ActivatedRoute);
+this.route.navigate(['courses'], {relativeTo: this.currentRoute }); //This will redirect to http://localhost:4200/home/courses
 
