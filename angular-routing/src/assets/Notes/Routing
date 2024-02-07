@@ -45,3 +45,22 @@ navigate, navigateByUrl and activatedRoute:
 //To get current url, use ActivatedRoute --> currentURL: ActivatedRoute = inject(ActivatedRoute);
 this.route.navigate(['courses'], {relativeTo: this.currentRoute }); //This will redirect to http://localhost:4200/home/courses
 
+Route Parameters:
+Thye are dynamic part of route, i.e. route that can change, for example id, they are specified using :varName like:
+localhost:4200/author/:authorName
+localhost:4200/books/:id
+localhost:4200/books/:isbn/:id  //We can specify multiple as well
+
+Reading Route params value:
+currentRoute: ActivatedRoute = inject(ActivatedRoute);
+this.courseId = this.currentRoute.snapshot.params['id'];  //old way of retreiving route params
+this.courseId = Number(this.currentRoute.snapshot.paramMap.get('id')); //newer and preferred way, returns string
+
+Above methods will not work in real time as ngOnInit is called only once,so courseId will be set only once, after this, if user navigates to next/prev page using buttons, courseId value will be incorrect and so page rendering will not change, just the url will change as its handled in html, to handle this, we use observables as below, this will emit 
+a new value on every page change and the subscription method will be called where logic on page change can be taken care of, follow below method henceforth:
+ 
+this.currentRoute.paramMap.subscribe((data)=>
+{
+  this.courseId = Number(data.get('id'));
+  this.selectedCourse = this.courseService.courses.find(crs => crs.id === this.courseId);
+});
