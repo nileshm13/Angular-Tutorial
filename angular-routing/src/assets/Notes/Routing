@@ -1,6 +1,6 @@
 Routing:
 1. For routing, first define a routes array of type Routes which is imported from library @angular/router.
-2. Register that route in imports array using Router.ForRoot(routes), ForRoot here specifies the routes specified in array are for entire application
+2. Register that route in imports array using RouterModule.forRoot(routes), ForRoot here specifies the routes specified in array are for entire application
 3. Each array element contains 2 properties, path and component
 4. If we want to redirect to a component, specify like {path: '', redirectTo: 'Home', pathMatch: 'full'}, this means when a default route is reached(localhost:4200 in our case), redirect to HomeComponenet's url (localhost:4200/Home)
 5. ** is a wild card route which matches every route path, so if no matching route found, the component specified for wild card route gets called. Wild card routes must be specified at the end of all predefined routes else wild card route will get called instead of actual specified route.
@@ -13,3 +13,21 @@ RouterLink:
 4. <a routerLink = "Home">HomePage</a> --> When HomePage is clicked on navigation bar, find route that matches Home and navigate to its component
 5. As its an attribute, we can specify it in square brackets, but it will expect a ts expression, hence define the route in single quote like: <a [routerLink] = "'Home'">HomePage</a>
 6. When link is specified using anchor tag, the page reloads on every navigation resulting in all css/other files getting fetched time and again, with routerLink, only the view changes and only new files gets asked from server resulting in an SPA beaviour and less load on every request.
+
+Absolute vs Relative Path:
+Absolute path is defined using / before path in routerlink. An absolute path means link specified will get appended to root url.
+Relative path is defined by directly specifying link in routerlink. A relative path means link specified to current url.
+Example:
+Lets say current url is localhost:4200/Courses and in html of courses component:
+If we use routerLink = '/python', it will search and redirect to route : localhost:4200/python
+If we use routerLink = 'python', it will search and redirect to route : localhost:4200/courses/python
+
+While specifying routing in router.module.ts, we use relative path, still it acts as absolute, why? Eg: If we navigate to home component and then to courses component, it gives localhost:4200/courses not localhost:4200/home/courses
+A: This is because relative is wrt current component as well, when we are in home component and routerlink is specified in its html, it will take current route and append to it, but when we are in router.module.ts, it is not any component but a module, so relativity is wrt root url i.e. localhost:4200
+
+routerLinkActive and routerLinkActiveOptions:
+1. routerLinkActive is used to specify CSS classes for active link so that it stands out from other links in navigation.
+[routerLinkActive]="'active-route'" -> active-route is the css class
+2. The only problem is it will highlight all the parent routes as well. So if routerLinkActive is specified for localhost:4200/courses/python, it will apply css class for both links localhost:4200/courses and localhost:4200/courses/python . in order to solve this issue, we have another attribute [routerLinkActiveOptions]="{exact: true}" which ensures exact route is only marked as active.
+ 
+
