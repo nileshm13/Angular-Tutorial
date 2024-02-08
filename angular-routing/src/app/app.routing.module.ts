@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from "./about/about.component";
 import { ContactComponent } from "./contact/contact.component";
@@ -14,10 +14,10 @@ import { canActivateChildGuard, canActivateGuard } from "./new-auth-guard";
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent, canDeactivate: [AuthGuardService] },
+    { path: 'home', component: HomeComponent},
     // { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'about', component: AboutComponent },
-    { path: 'contact', component: ContactComponent, canDeactivate: [AuthGuardService] },
+    { path: 'contact', component: ContactComponent, canDeactivate: [(cmp: ContactComponent)=>{ return cmp.onExit()}] },
     { path: 'courses', component: CoursesComponent },
     {
         path: 'courses', canActivateChild: [canActivateChildGuard], children: [
