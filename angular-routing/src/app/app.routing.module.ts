@@ -7,6 +7,7 @@ import { CoursesComponent } from "./courses/courses.component";
 import { HomeComponent } from "./home/home.component";
 import { PopularComponent } from "./home/popular/popular.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
+import { LoginComponent } from "./login/login.component";
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,7 +23,9 @@ const routes: Routes = [
         ]
     },
     // { path: 'courses/course/:id', component: CourseDetailComponent },
+    { path: 'login', component: LoginComponent },
     { path: '**', component: NotFoundComponent }
+    
 ]
 
 

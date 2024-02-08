@@ -1,0 +1,2 @@
+Route Guard:
+Can be used to control whether a user can navigate to a route or away from it based on a given condition.
