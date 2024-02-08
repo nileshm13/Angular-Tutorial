@@ -14,7 +14,7 @@ import { canActivateChildGuard, canActivateGuard } from "./new-auth-guard";
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent, canDeactivate: [AuthGuardService] },
     // { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent, canDeactivate: [AuthGuardService] },
