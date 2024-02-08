@@ -1,7 +1,8 @@
 import { Injectable, inject } from "@angular/core";
-import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterModule, RouterStateSnapshot, mapToCanActivate } from "@angular/router";
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, Router, RouterModule, RouterStateSnapshot, UrlTree, mapToCanActivate } from "@angular/router";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
+import { ContactComponent } from "../contact/contact.component";
 
 //For canActivate, (this is v14 or below)
 // 1. Create a service that inherits CanActivate
@@ -12,7 +13,10 @@ import { AuthService } from "./auth.service";
 @Injectable({
     'providedIn': 'root'
 })
-export class AuthGuardService implements CanActivate {
+
+
+
+export class AuthGuardService implements CanActivate, CanActivateChild, CanDeactivate<ContactComponent> {
     authService: AuthService = inject(AuthService);
     route: Router = inject(Router);
 
@@ -26,5 +30,13 @@ export class AuthGuardService implements CanActivate {
             this.route.navigate(['/login']);
             return false;
         }
+    }
+
+    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        return this.canActivate(childRoute, state);  //rather than writing same code as above, calling the above method
+    }
+
+    canDeactivate(component: ContactComponent, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState: RouterStateSnapshot) {
+        return component.onExit();
     }
 }

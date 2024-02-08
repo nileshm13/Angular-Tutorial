@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.isLoggedOut = Boolean(data.get('logout'));
       if (this.isLoggedOut) {
         this.authService.logout();
-        alert('You have been logged out: ' + this.authService.isLogged);
+        alert('You have been logged out: ');
       }
     })
 

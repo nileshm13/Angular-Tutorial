@@ -1,2 +1,5 @@
 Route Guard:
 Can be used to control whether a user can navigate to a route or away from it based on a given condition.
+
+CanActivateChild protects only child routes, not the parent route, if you want to protect both, specify canActivate on parent route. It needs to be specified on the route wherein children array is specified.
+CanDeactivate<boolean> --> This is how canDeactivate needs to be declared
