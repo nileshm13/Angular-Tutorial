@@ -64,3 +64,36 @@ this.currentRoute.paramMap.subscribe((data)=>
   this.courseId = Number(data.get('id'));
   this.selectedCourse = this.courseService.courses.find(crs => crs.id === this.courseId);
 });
+
+QueryParams:
+1. Optional data in a route, of not specified, it does not stop angular from navigating to that route.
+2. It must always be defined in view template or component(using route.navigate), can;t be specified in router.module.ts
+routeParams are mandatory, they help to determine the route and are a part of route definition
+3. In view template, specify route in [routerLink] and [queryParams]="{search: searchText}", this will have ?search=searchText_Value
+4. We can specify similarly in component using route.navigate like: this.route.navigate(['courses'], { queryParams: { search: this.searchText } });
+5. Read queryParams: 
+this.currentRoute.queryParamMap.subscribe((data) => {
+  this.querySearchText = data.get('search'); 
+});
+
+Fragments:
+1. It is used to redirect to a specific section of an HTML page, like Home page has Search, Popular, Testimony, Services, COntact. All these are part of HomeComponent, but each specified using a specific id in html file.
+2. To link fragments, go where navigation links are specified and there along with routerLink, provide fragments property which accepts a string value, this string should be html id of section we want to reDirect to.
+3. Reading fragment name -> inside ngOnInit -> 
+this.currentRoute.fragment.subscribe((data) => {
+  if (data) {
+    document.getElementById(data).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+Child routes:
+To specify them, path property will have parent component's route and there will be a children array property each of which has path and property.
+{
+  path: 'courses', children: [  //this path should match route of parent
+    { path: 'course/:id', component: CourseDetailComponent },
+    { path: 'popular', component: PopularComponent }
+  ]
+}
+
+Defining routing module:
+Add a class : RoutingModule, decorate with @NgModule({}) decorator and inside it provide imports array(RouterMoudle.forRoot(routes) to register the routes) and exports array(RoutingModule to make it visible to other modules so that app.module.ts can import it)
