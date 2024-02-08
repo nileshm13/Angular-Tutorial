@@ -11,7 +11,7 @@ export class AuthService {
     userService: UserService = inject(UserService);
 
     login(username: string, password: string) {
-        this.user = this.userService.users.find((us) =>
+        this.user = this.userService.users.find(us =>
             us.username === username && us.password === password
         );
         console.log(this.user);
