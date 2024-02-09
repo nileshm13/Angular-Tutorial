@@ -24,7 +24,7 @@ const routes: Routes = [
         path: 'courses', canActivateChild: [canActivateChildGuard], children: [
             { path: 'course/:id', component: CourseDetailComponent },
             { path: 'popular', component: PopularComponent },
-            { path: 'checkout', component: CheckoutComponent }
+            { path: 'checkout', component: CheckoutComponent, data: {title: 'Head First JavaScript', price: 500} }
         ]
     },
     // { path: 'courses/course/:id', component: CourseDetailComponent },
