@@ -10,7 +10,7 @@ import { NotFoundComponent } from "./not-found/not-found.component";
 import { LoginComponent } from "./login/login.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { AuthGuardService } from "./Services/authguard.service";
-import { canActivateChildGuard, canActivateGuard } from "./new-auth-guard";
+import { canActivateChildGuard, canActivateGuard, resolveRouteGuard } from "./new-auth-guard";
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,7 +18,8 @@ const routes: Routes = [
     // { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent, canDeactivate: [(cmp: ContactComponent)=>{ return cmp.onExit()}] },
-    { path: 'courses', component: CoursesComponent },
+    //{ path: 'courses', component: CoursesComponent, resolve: [AuthGuardService] },
+    { path: 'courses', component: CoursesComponent, resolve: {courses: resolveRouteGuard} },
     {
         path: 'courses', canActivateChild: [canActivateChildGuard], children: [
             { path: 'course/:id', component: CourseDetailComponent },

@@ -3,3 +3,7 @@ Can be used to control whether a user can navigate to a route or away from it ba
 
 CanActivateChild protects only child routes, not the parent route, if you want to protect both, specify canActivate on parent route. It needs to be specified on the route wherein children array is specified.
 CanDeactivate<boolean> --> This is how canDeactivate needs to be declared
+
+Resolve expects an object with key and value, value being authGuardService file reference implementing resolve method.
+In AuthGuardService method, implement resolve function which returns data, the route will become active only after data is loaded.
+The data that is resolved is accessible in corresponding component using this.activatedRoute.snapshot.data['courses'] where in routing module,  resolve: {courses: AuthGuardService}
