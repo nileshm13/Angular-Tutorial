@@ -1,6 +1,7 @@
 import { inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "./Services/auth.service";
+import { CourseService } from "./Services/course.service";
 
 //1. Create a callback function and assign it to a const variable of type boolean
 //2. Assign this in routing module to canActivate property
@@ -18,4 +19,9 @@ export const canActivateGuard = () => {
 
 export const canActivateChildGuard = () => {
     return canActivateGuard();
+}
+
+export const resolveRouteGuard = () => {
+    let courseService: CourseService = inject(CourseService);
+    return courseService.getAllcourses();
 }

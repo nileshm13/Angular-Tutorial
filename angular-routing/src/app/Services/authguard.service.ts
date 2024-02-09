@@ -1,8 +1,11 @@
 import { Injectable, inject } from "@angular/core";
-import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, Router, RouterModule, RouterStateSnapshot, UrlTree, mapToCanActivate } from "@angular/router";
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, Resolve, Router, RouterModule, RouterStateSnapshot, UrlTree, mapToCanActivate } from "@angular/router";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 import { ContactComponent } from "../contact/contact.component";
+import { CoursesComponent } from "../courses/courses.component";
+import { CourseService } from "./course.service";
+import { Course } from "../Models/course";
 
 //In order for canDeactivate to be reused across multiple components:
 //Create an interface, export it so that it can be implemented across componenets, and specify a method declaration inside it with its return type
@@ -19,9 +22,10 @@ export class IDeactivateComponent {
 @Injectable({
     'providedIn': 'root'
 })
-export class AuthGuardService implements CanActivate, CanActivateChild, CanDeactivate<IDeactivateComponent> {
+export class AuthGuardService implements CanActivate, CanActivateChild, CanDeactivate<IDeactivateComponent>, Resolve<Course[]>{
     authService: AuthService = inject(AuthService);
     route: Router = inject(Router);
+    courseService: CourseService = inject(CourseService);
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
         boolean | Observable<boolean> | Promise<boolean>//these are possible return types 
@@ -41,5 +45,11 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanDeact
 
     canDeactivate(component: IDeactivateComponent, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState: RouterStateSnapshot) {
         return component.onExit();
+    }
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course[]> {
+        //this.courseService = inject(CourseService);
+        //As return type is courses, this data is accessible in activatedRoute
+        return this.courseService.getAllcourses();
     }
 }
