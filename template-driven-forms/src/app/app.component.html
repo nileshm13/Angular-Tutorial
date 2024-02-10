@@ -1,32 +1,32 @@
 <section class="container">
   <header>Registration Form</header>
 
-  <form class="form">
+  <form class="form" #registrationForm = "ngForm" (ngSubmit)="submitForm()">
     <div class="column">
       <div class="input-box">
-        <input type="text" placeholder="First Name" />
+        <input type="text" placeholder="First Name" name = "firstname" ngModel/>
       </div> 
 
       <div class="input-box">
-        <input type="text" placeholder="Last Name" />
+        <input type="text" placeholder="Last Name"  name="lastname" ngModel/>
       </div>
     </div>    
 
     <div class="input-box">
-      <input type="text" placeholder="Email" />
+      <input type="text" placeholder="Email"  name="emailAdd" ngModel/>
     </div>
 
     <div class="column">
       <div class="input-box">
-        <input type="number" placeholder="Phone Number" />
+        <input type="number" placeholder="Phone Number"  name="phoneNo" ngModel/>
       </div>
       <div class="input-box">
-        <input type="date" placeholder="Date of Birth" />
+        <input type="date" placeholder="Date of Birth" name="dob" ngModel/>
       </div>
     </div>
 
     <div class="input-box">
-      <input type="text" placeholder="username" />
+      <input type="text" placeholder="username"  name="usrname" ngModel/>
       <button class="btn-gen-username">
         Create a Username
       </button>
@@ -36,15 +36,15 @@
       <h3>Gender</h3>
       <div class="gender-option">
         <div class="gender">
-          <input type="radio" id="check-male" name="gender" checked />
+          <input type="radio" id="check-male" name="gender" checked ngModel/>
           <label for="check-male">male</label>
         </div>
         <div class="gender">
-          <input type="radio" id="check-female" name="gender" />
+          <input type="radio" id="check-female" name="gender" ngModel/>
           <label for="check-female">Female</label>
         </div>
         <div class="gender">
-          <input type="radio" id="check-other" name="gender" />
+          <input type="radio" id="check-other" name="gender" ngModel/>
           <label for="check-other">prefer not to say</label>
         </div>
       </div>
@@ -52,11 +52,11 @@
 
     <div class="input-box address">
       <label>Address</label>
-      <input type="text" placeholder="Street address" />
-      <input type="text" placeholder="Street address line 2" />
+      <input type="text" placeholder="Street address" name = "addressLine1" ngModel/>
+      <input type="text" placeholder="Street address line 2" name = "addressLine2" ngModel/>
       <div class="column">
         <div class="select-box">
-          <select name="country">
+          <select name="country" ngModel>
             <option hidden>Country</option>
             <option>America</option>
             <option>Japan</option>
@@ -64,13 +64,13 @@
             <option>Nepal</option>
           </select>
         </div>
-        <input type="text" placeholder="City" />
+        <input type="text" placeholder="City" name = "city" ngModel/>
       </div>
       <div class="column">
-        <input type="text" placeholder="Region" />
-        <input type="number" placeholder="Postal code" />
+        <input type="text" placeholder="Region" name = "region" ngModel/>
+        <input type="number" placeholder="Postal code" name = "postalCode" ngModel/>
       </div>
     </div>
-    <input type="button" value="Submit" class="submit-btn"> 
+    <input type="submit" value="Submit" class="submit-btn"> 
   </form>
 </section>
