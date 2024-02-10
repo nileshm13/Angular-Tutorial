@@ -1,6 +1,6 @@
 import { Student } from "../Models/Student";
 
-export class StudentService{
+export class StudentService {
     students: Student[] = [
         new Student(1, 'John Smith', 'Male', new Date('11-12-1997'), 'MBA', 520, 1899),
         new Student(2, 'Mark Vought', 'Male', new Date('10-06-1998'), 'B.Tech', 420, 2899),
@@ -12,9 +12,20 @@ export class StudentService{
 
     totalMarks: number = 600;
 
-    CreateStudent(name, gender, dob, course, marks, fee){
+    CreateStudent(name, gender, dob, course, marks, fee) {
         let id = this.students.length + 1;
         let student = new Student(id, name, gender, dob, course, marks, fee);
         this.students.push(student);
+    }
+
+    filterStudentsByGender(gender: string) {
+        if (gender.toLowerCase() === 'all') {
+            return this.students;
+        }
+        else {
+            return this.students.filter((student) => {
+                return student.gender.toLowerCase() === gender.toLowerCase()
+            });
+        }
     }
 }

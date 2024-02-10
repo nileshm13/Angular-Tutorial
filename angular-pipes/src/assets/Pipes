@@ -25,3 +25,15 @@ Steps to create:
 parameters for the pipe.
 5. Use the pipe wherever required 
 
+Pure and Impure pipes:
+Pure pipes are ones which gets called whenever there is a pure change in an application, by default all pipes are pure.
+In order to set pipes pure/impure, set pure property to true/false inside Pipe decorator.
+Pure change: For a value type, whenever there is a change in value, for a reference type, whenever their reference is changed. So if array value is copied from another array, its reference can change. However, if a property inside an array is changed or an element is changed, it will not get called.
+Impure pipe gets called for every change detection cycle, so they are performance intensive and should be used with care.
+
+Why should pipes be not used for filtering or sorting of data:
+In students display page, select a gender filter and add a student of that specific gender type. Once you save the student, its not visible, once you select different gender and select this back, only then the new student appears. So changes for pure pipe does not take place instanly, it requires page/data to be reloaded. However, if impure pipes are used, it will work perfectly and changes are visible instantly. But they are called on every change detection cycle, so if there is a mouse hover event, even then this pipe gets called even though there is no requirement for it to be called.
+In order to implement sort/filter functionality, use services and write a method there or can write in component directly as well.
+
+Async pipe: 
+If helps to handle asynchronous data. We can subscibe to observable or promise from view template and return the value emitted. The section displaying observable/promise will be blank in UI until value is emitted. Once value is emitted, the latest value gets shown.

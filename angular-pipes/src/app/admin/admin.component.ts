@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { StudentService } from '../Services/student.service';
 import { Student } from '../Models/Student';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -12,11 +13,11 @@ export class AdminComponent implements OnInit {
   isEditing: boolean = false;
   isInserting: boolean = false;
   stdIdToEdit: number;
-
+  filterText = 'all';
   students: Student[];
   totalMarks: number;
-  selectedGender: string = 'All';
-  
+  totalStudents: Observable<number>;
+
   //PROPERTIES FOR INSERTING
   @ViewChild('name') Name: ElementRef;
   @ViewChild('gender') Gender: ElementRef;
@@ -33,45 +34,60 @@ export class AdminComponent implements OnInit {
   @ViewChild('editMarks') editMarks: ElementRef;
   @ViewChild('editFee') editFee: ElementRef;
 
-  ngOnInit(){
+  ngOnInit() {
     this.students = this.studentService.students;
     this.totalMarks = this.studentService.totalMarks;
+    this.totalStudents = new Observable((obs) => {
+      setTimeout(() => {
+        obs.next(this.students.length); //Trying to mock async pipe behavior (see total students getting displayed after 3 seconds)
+      }, 3000)
+    });
   }
 
-  OnInsertClicked(){
-    this.isInserting = true;    
+  OnInsertClicked() {
+    this.isInserting = true;
   }
-  OnInsertCancelled(){
+  OnInsertCancelled() {
     this.isInserting = false;
   }
-  OnInsertSaved(){
+  OnInsertSaved() {
     this.studentService.CreateStudent(
-      this.Name.nativeElement.value, 
-      this.Gender.nativeElement.value, 
-      this.Dob.nativeElement.value, 
-      this.Course.nativeElement.value, 
-      this.Marks.nativeElement.value, 
+      this.Name.nativeElement.value,
+      this.Gender.nativeElement.value,
+      this.Dob.nativeElement.value,
+      this.Course.nativeElement.value,
+      this.Marks.nativeElement.value,
       this.Fee.nativeElement.value
     );
     this.isInserting = false;
+    this.students = this.studentService.filterStudentsByGender(this.filterText);
+    this.totalStudents = new Observable((obs) => {
+      obs.next(this.students.length); //Trying to mock async pipe behavior (see total students getting displayed after 3 seconds)      
+    });
   }
 
-  OnEditClicked(stdId: number){
-    this.isEditing = true;
-    this.stdIdToEdit = stdId;    
-  }
-  OnEditCancelled(){
-    this.isEditing = false;
-  }
+    OnEditClicked(stdId: number) {
+      this.isEditing = true;
+      this.stdIdToEdit = stdId;
+    }
+    OnEditCancelled() {
+      this.isEditing = false;
+    }
 
-  OnEditSaved(student: Student){
-      student.name = this.editName.nativeElement.value; 
-      student.gender = this.editGender.nativeElement.value; 
-      student.dob = this.editDob.nativeElement.value; 
-      student.course = this.editCourse.nativeElement.value; 
-      student.marks = this.editMarks.nativeElement.value; 
+    OnEditSaved(student: Student) {
+      student.name = this.editName.nativeElement.value;
+      student.gender = this.editGender.nativeElement.value;
+      student.dob = this.editDob.nativeElement.value;
+      student.course = this.editCourse.nativeElement.value;
+      student.marks = this.editMarks.nativeElement.value;
       student.fee = this.editFee.nativeElement.value;
 
       this.isEditing = false;
+      this.students = this.studentService.filterStudentsByGender(this.filterText);
+    }
+
+    onGenderFilterChange(event) {
+      this.filterText = event.target.value;
+      this.students = this.studentService.filterStudentsByGender(this.filterText);
+    }
   }
-}
