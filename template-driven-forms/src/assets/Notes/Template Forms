@@ -1,0 +1,15 @@
+Template Driven Forms:
+Import Forms Module for the form will be treated as template driven.
+Change the button on form to type = "submit" and add (ngSubmit) to form element.
+Add template reference variable to ngForm and assign ngForm to it like #formRef = "ngForm", this will allow form to be accessed as json in component class.
+Access form element using ViewChild and assign type as ngForm, this value can be read on button click.
+At this moment, controls and values object will be empty in ngForm object.
+
+For controls to be created in ngForm:
+Add a name to each element.
+Assign ngModel attribute to each of them. This will create controls with name specified.
+Form has values array which contain values against each form element.
+It also has FormControls which contains properties such as dirty, touched, valid, etc.
+If an element is focused, touched is true else untouched is true.
+If value is changed, dirty is true else pristine is true.
+If value is valid, valid is true else invalid is true.
