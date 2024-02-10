@@ -1,0 +1,27 @@
+Pipes: (refer to Angular Docs -> API Reference -> Pipes)
+Pipe can be applied within string interpolation like: {{ value | pipe}} --> {{ course | uppercase}}
+For parameters, use : after pipe name and specify the parameter value in quotes like {{ dob | date : 'longDate'}}
+
+Date pipe: {{ dob | date : 'longDate'}}
+
+Percent pipe: {{ (std.marks / totalMarks) | percent : '2.2-4' }} 
+2.2-4 -> {minimum digits before decimal}.{minimum digits after decimal}-{maximum digitis after decimal}
+eg result: 63.3333%
+
+Currency pipe: {{ std.fee | currency: 'INR': true: '3.0-0'}}
+Default currency is USD
+currency: 'INR': true: '3.0-0'
+INR is currency code
+true is display prpoerty of boolean type -> true means display symbol, false means display code
+3.0-0-> {minimum digits before decimal}.{minimum digits after decimal}-{maximum digitis after decimal}
+
+Custom pipe:
+A pipe filename should be pipeName.pipe.ts
+Steps to create:
+1. Create a class, export it and decorate it with @Pipe decorator, specify the name within pipe attribute.
+2. This name of the pipe will be used throughout the application, not the className.
+3. Specify name of the pipe in declarations array.
+4. Inherit PipeTransform interface and implement transform method, first parameter will be data to be filtered, second and so on are the 
+parameters for the pipe.
+5. Use the pipe wherever required 
+

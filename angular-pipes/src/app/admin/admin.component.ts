@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
 
   students: Student[];
   totalMarks: number;
+  selectedGender: string = 'All';
   
   //PROPERTIES FOR INSERTING
   @ViewChild('name') Name: ElementRef;
@@ -38,7 +39,7 @@ export class AdminComponent implements OnInit {
   }
 
   OnInsertClicked(){
-    this.isInserting = true;
+    this.isInserting = true;    
   }
   OnInsertCancelled(){
     this.isInserting = false;
@@ -57,7 +58,7 @@ export class AdminComponent implements OnInit {
 
   OnEditClicked(stdId: number){
     this.isEditing = true;
-    this.stdIdToEdit = stdId;
+    this.stdIdToEdit = stdId;    
   }
   OnEditCancelled(){
     this.isEditing = false;
