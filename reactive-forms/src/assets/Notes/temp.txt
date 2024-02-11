@@ -1,0 +1,72 @@
+import reactiveformsmodule
+define var of type FormGroup in cmp
+this.reactform = new formGroup({
+fname: new formcontrol(null)  // specify default value in place of null, assign value ot each radio btn
+})
+ngfrom is type of form group, template driven(ngform is default)
+[formGroup] = "reactform" in html for form element, [formcontrolname] for each element
+
+Validations:
+fname = new FormControl(null, Validators.required) // for multiple, use array
+errors array inside controls contain error
+
+Validation Error Msg:
+In html page, you can fetch it using reactForm.get('firstname').invalid i.e fomrGrpName.get('formCtrlName').invalid
+disable btn if form has any error.
+
+Grouping form controls:
+1. address: new FormGroup({
+	line1: new formcontrol(null)
+	})
+2. Add div to contain all related ones in html
+3. add formGroupName = "varName" to that div, lets keep varName ="address"
+To access in html, use reactForm.get('address.street').invalid
+
+FormArray:
+FG stores FC as key value pair in object. fg = new FG({})
+FA stores FC as an element of array.
+skills:[(
+new FC(null, reqd),
+new FC(null),
+new FC(null)
+)]
+In HTML, create a new div and assign formArrayName = ""
+inside that, add another div whihc has ngFor, inside it there's input type = "text", placeholder, [formControlName]="" --> this maps FC elements inside FA in cmp to HTML ones allowing all props like pristine, etc.
+
+Adding and Removing(10:26, #129) FCs dynamically:
+Add a btn to add skills, type and class = "btn-add-delete", on click, insert new FC by accessing FC, only formarray has push mtd, return type is absstractcontrol so typecast
+
+Create a new btn for each skill fc in html
+send index to cmp, get control using id, assign to var and var.removeAt(index)  
+
+Adding Form Group dynamically:
+see video again
+Create a form array and add form group inside it dynamically, each form group will have form control as well.
+
+
+Custom Validator:
+Every validator returns an error code when validation fails - eg: required/email having true/false values, avl in errors property
+Each validator is a static method
+static required(AbstractControl): ValidationErrors | null
+noSpaceAllowed.validator.ts, assign it in cmp like a normal validator
+Show error message in html
+
+Async validator:
+see img
+An async validator is used when we need to wait for http request(api/some other async check) to be completed before showing an error. It must return an observable or promise. Create a function that mocks username exists functionality and return promise/observable, then from custom validator class, create a validator method and call that custom method and return it. 3rd param to Form control object is async validator. Show yellow color for async validator.
+
+valueChanges and stateChanges:
+Both are applied to FC,FA and FG.
+valueChanges returns an observable whenever there is a change in value of a FC/FG/FA. Just get by id any FC/FA/FG, and subscribe to valueChanges. The value gets logged.
+this.reactForm.get().valueChanges.subscibe((res)=>{console.log(res)})
+
+stateChanges gets called whenever state of FC/FA/FG changes, there are 3 validation states, valid/invalid/pending. Its an observable as well. The state gets printed on subsciprtion. Add an ngClass to a form and add a border around it based on valid state.
+
+setValue and patchValue:
+It can be used on a FC/FG/FA. It is same as template driven form, just 2 changes:
+1. When using patchValue, we dont need to specify .form, can access directly like this.reactForm.patchValue({username: usrName}) 
+2. When using setValue on formControl, we can specify value directly as its a FC(element), like this.reactForm.get('email').setValue(usrname);
+
+Retreiving form data:
+Create an empty object and assign it this.reactForm.value on submit.
+Reset is same , this.reactForm.reset(), if we want some values set after reset, pass the entire object as we do in setValue inside of reset(value_goes_here)
