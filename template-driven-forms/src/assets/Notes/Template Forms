@@ -24,3 +24,23 @@ As ngModel attribute is already added, assign it to template reference variable 
 <div *ngIf="fname.invalid && fname.touched">
     <small>*First Name is required</small>
 </div>
+
+#FormGroup
+Its a collection of form controls used to control related ones together.
+We use ngModelGroup directive. Assign ngModelGroup = "anyVarName" to the div containing all the related section within it and #varName = "ngModelGroup" for template referencing.
+<!-- FomrControl created with name addressSection and #addressGrp is for template referencing -->
+<div class="input-box address" ngModelGroup="adressSection" #addressGrp="ngModelGroup">
+Even if one of the form element has any invalid data, entire formgroup is invalid.
+
+SetValue and PatchValue:
+If we want to assign a value to form control element, we cant do it directly using:  this.form.controls['firstaname'].value = "Nilesh" , instead we need to use setValue and patchValue
+For setValue, in form control, there is a values object, we need to provide structure which is replica of original object and assign existing value to all properties except to one which is to be updated,
+this.form.setValue({
+    obj structure goes here
+    });
+
+In patch value, only value that needs to be updated must be specified, 
+this.form.form.patchValue({
+    username: username
+    })
+    
