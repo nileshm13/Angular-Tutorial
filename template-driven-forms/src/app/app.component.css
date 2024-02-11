@@ -75,7 +75,7 @@
   height: 100%;
   width: 100%;
   outline: none;
-  border: 2px solid;
+  border: 2px solid black;
   border-radius: 6px;
   color: #707070;
   font-size: 1rem;
@@ -165,8 +165,9 @@ span{
   font-weight: bold;
 }
 
-.form .submit-btn[disabled]{
+
+.form .submit-btn[disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
-  color: #666666;
+  color: #666666;;
 }

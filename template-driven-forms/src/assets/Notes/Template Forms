@@ -33,8 +33,8 @@ We use ngModelGroup directive. Assign ngModelGroup = "anyVarName" to the div con
 Even if one of the form element has any invalid data, entire formgroup is invalid.
 
 SetValue and PatchValue:
-If we want to assign a value to form control element, we cant do it directly using:  this.form.controls['firstaname'].value = "Nilesh" , instead we need to use setValue and patchValue
-For setValue, in form control, there is a values object, we need to provide structure which is replica of original object and assign existing value to all properties except to one which is to be updated,
+If we want to assign a value to form control element, we cant do it directly using:  this.form.controls['firstaname'].value = "Nilesh" , it gives an error: Cannot assign to 'value' because it is a read-only property. Instead we need to use setValue and patchValue.
+For setValue, in form control, there is a values object, we need to provide structure which is replica of original object and assign existing value to all properties except to one which is to be updated,provide updatesd value to the property(field) you want to update. These names are same as name attribue.
 this.form.setValue({
     obj structure goes here
     });
@@ -43,4 +43,5 @@ In patch value, only value that needs to be updated must be specified,
 this.form.form.patchValue({
     username: username
     })
-    
+
+To reset a form, use this.form.reset(), with this, all the form controls and its values gets reset, so checkboxes uncheked, dropdowns empty, text boxes empty, evertything is reset aling with classes like pristine/dirty/valid/invalid/touched/untouced
