@@ -13,4 +13,22 @@ In TS: 2nd param of FormControl object is validators, it contains required, emai
 If more than one validator needs to be specified, it should be specified in array like: new FormControl(null, [Validators.required, Validators.email])
 There is an errors property on each form control which lists all the errors. It has keys like required, email, etc.
 Ti display error msg in HTML, use get('formControlName') like ngIf="employeeForm.get('fname').invalid
-FormGroup has its own valid and other properties like FormControls, form submission using button can be controlled using FormGroups valid property. 
+FormGroup has its own valid and other properties like FormControls, form submission using button can be controlled using FormGroups valid property.
+
+FormGroup:
+For FormGroup, place entire section in a container like div.
+Create a FormGroup inside main FormGroup with a name (eg: address)
+Assign FormGroupName = "address" in HTML to div element.
+Now, we can add validation based on entire group section.
+
+FormArray:
+Similar to FormGroup, just that here each element is an array instead of key value pair.
+Create a FormArray object inside of FormGroup eg: skills.
+Assign formArrayName = "skills" to the div.
+Inside div, create another div or container which iterates over elements of FormArray.
+Inside ngFor, create a control like input which should have a formControlName = "i" assigned where i = index of ngFor iteration.
+
+Add/Remove element to FormArray:
+this.employeeForm.get('skills') where skills is a FormArray has return type of AbstractControl which includes FormControl,FormGroup, FormArray. To add an element we need to push and to remove using an index, we need removeAt. These extensions are not available under AbstractControl, so we typecast and use it like:
+(<FormArray>this.employeeForm.get('skills')).push(new FormControl(null));
+(<FormArray>this.employeeForm.get('skills')).removeAt(index);

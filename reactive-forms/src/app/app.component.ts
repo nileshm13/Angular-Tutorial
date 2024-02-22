@@ -19,19 +19,32 @@ export class AppComponent implements OnInit {
       usrname: new FormControl(null),
       dob: new FormControl(null),
       gender: new FormControl('male'),
-      streetAddress: new FormControl(null),
-      country: new FormControl('India'),
-      city: new FormControl(null),
-      region: new FormControl(null),
-      postalCode: new FormControl(null),
+      address: new FormGroup({
+        streetAddress: new FormControl(null, Validators.required),
+        country: new FormControl('India'),
+        city: new FormControl(null, Validators.required),
+        region: new FormControl(null),
+        postalCode: new FormControl(null, Validators.required)
+      }),
       skills: new FormArray([
-        //new FormControl(null),
+        new FormControl(null, Validators.required)
       ])
     });
   }
 
   submitDetails() {
     console.log(this.employeeForm);
+  }
+
+  addSkill() {
+    //This returns an abstract control, but  it does ont have push method which we need to push FC into employeeForm group so we typecast. We know return type of skills is FormArray.
+    //this.employeeForm.get('skills');
+    (<FormArray>this.employeeForm.get('skills')).push(new FormControl(null));
+    console.log(this.employeeForm.get('skills'));
+  }
+
+  deleteSkill(index: number) {
+    (<FormArray>this.employeeForm.get('skills')).removeAt(index);
   }
 
 } 
