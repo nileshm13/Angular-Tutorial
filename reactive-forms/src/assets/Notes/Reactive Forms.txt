@@ -1,0 +1,16 @@
+Reactive Forms:
+Import ReactiveFormsModule in app.module.ts
+
+Setting up form:
+In HTML: For form element, assign [formGroup]="employeeForm", for form controls(fields), use formControlName="fname", formControlName="lname", etc.
+In TS: Create a variable of type FormGroup, inside it would be a key value pair of form Controls with null as deafult value. If default value needs to be specified like CountryName/Gender selected on page load, define that instead of null like -->  country: new FormControl('India'),
+eg:  this.employeeForm = new FormGroup({
+      fname: new FormControl(null),
+      lname: new FormControl(null)})
+
+Validations:
+In TS: 2nd param of FormControl object is validators, it contains required, email, max, min, etc.
+If more than one validator needs to be specified, it should be specified in array like: new FormControl(null, [Validators.required, Validators.email])
+There is an errors property on each form control which lists all the errors. It has keys like required, email, etc.
+Ti display error msg in HTML, use get('formControlName') like ngIf="employeeForm.get('fname').invalid
+FormGroup has its own valid and other properties like FormControls, form submission using button can be controlled using FormGroups valid property. 
