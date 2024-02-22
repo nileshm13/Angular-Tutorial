@@ -39,3 +39,20 @@ Validator is basically a static method which contains logic for validating input
 See Async Validator.png
 Each Control has errors property, look out for this to see if any error logged. New validators error property will be added here as well.
 Async validators are added as 3rd param of Form Control, so FormControl
+
+valueChanges and stateChanges:
+Both are applied to FormControl,FormArray and FormGroup.
+valueChanges returns an observable whenever there is a change in value of a FormControl/FormGroup/FormArray. Just get by id any FormControl/FormArray/FormGroup, and subscribe to valueChanges. The value gets logged.
+this.reactForm.get().valueChanges.subscibe((res)=>{console.log(res)})
+
+stateChanges gets called whenever state of FormControl/FormArray/FormGroup changes, there are 3 validation states, valid/invalid/pending. Its an observable as well. The state gets printed on subsciption. Status of a FormGroup is valid only if all the FormControls inside it are valid, it is invalid/pending if even one is pending/invalid. Add an ngClass to a form and add a border around it based on valid state to test it.
+
+setValue and patchValue:
+It can be used on a FormControl/FormGroup/FormArray. It is same as template driven form, just 2 changes:
+1. When using patchValue, we dont need to specify .form, can access directly like this.reactForm.patchValue({username: usrName}) 
+2. When using setValue on formControl, we can specify value directly as its a FormControl(element), like this.reactForm.get('email').setValue(usrname);
+3. Use setValue on a FormControl if only a single control needs to be changed, use it on formGroup entirely is multiple fields need to be updated.
+
+Retreiving form data:
+Create an empty object and assign it this.reactForm.value on submit.
+Reset is same , this.reactForm.reset(), if we want some values set after reset, pass the entire object as we do in setValue inside of reset(value_goes_here)
