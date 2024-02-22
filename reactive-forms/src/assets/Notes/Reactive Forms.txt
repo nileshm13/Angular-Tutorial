@@ -38,3 +38,4 @@ They are of 2 types: Sync and Async, by default, angular does not have async val
 Validator is basically a static method which contains logic for validating input. This can be used with form element.
 See Async Validator.png
 Each Control has errors property, look out for this to see if any error logged. New validators error property will be added here as well.
+Async validators are added as 3rd param of Form Control, so FormControl
