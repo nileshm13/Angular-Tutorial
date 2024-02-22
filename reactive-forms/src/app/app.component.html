@@ -1,47 +1,50 @@
 <section class="container">
   <header>Registration Form</header>
 
-  <form class="form">
+  <form class="form" [formGroup]="employeeForm" (ngSubmit)="submitDetails()">
     <div class="column">
       <div class="input-box">
-        <input type="text" placeholder="First Name" />
+        <input type="text" placeholder="First Name" formControlName="fname" />
+        <small *ngIf="employeeForm.get('fname').invalid && employeeForm.get('fname').touched">*First Name is required</small>
       </div>
       <div class="input-box">
-        <input type="text" placeholder="Last Name" />
+        <input type="text" placeholder="Last Name" formControlName="lname" />
+        <small *ngIf="employeeForm.get('lname').invalid && employeeForm.get('lname').touched">*Last Name is required</small>
       </div>
-    </div>    
+    </div>
 
     <div class="input-box">
-      <input type="text" placeholder="Email" />
+      <input type="text" placeholder="Email" formControlName="email" />
+      <small *ngIf="employeeForm.get('email').invalid && employeeForm.get('email').touched">*Email is required</small>
     </div>
 
     <div class="column">
       <div class="input-box">
-        <input type="text" placeholder="username" />
+        <input type="text" placeholder="username" formControlName="usrname" />
         <button class="btn-gen-username" type="button">
           Create a Username
         </button>
       </div>
       <div class="input-box">
-        <input type="date" placeholder="Date of Birth" />
+        <input type="date" placeholder="Date of Birth" formControlName="dob" />
       </div>
     </div>
 
-    
+
 
     <div class="gender-box">
       <h3>Gender</h3>
       <div class="gender-option">
         <div class="gender">
-          <input type="radio" value="male" id="check-male" />
+          <input type="radio" value="male" id="check-male" formControlName="gender"/>
           <label for="check-male">Male</label>
         </div>
         <div class="gender">
-          <input type="radio" value="female" id="check-female" />
+          <input type="radio" value="female" id="check-female" formControlName="gender"/>
           <label for="check-female">Female</label>
         </div>
         <div class="gender">
-          <input type="radio" value="other" id="check-other" />
+          <input type="radio" value="other" id="check-other" formControlName="gender"/>
           <label for="check-other">Prefer not to say</label>
         </div>
       </div>
@@ -49,10 +52,10 @@
 
     <div class="input-box address">
       <label>Address</label>
-      <input type="text" placeholder="Street address" />
+      <input type="text" placeholder="Street address" formControlName="streetAddress"/>
       <div class="column">
         <div class="select-box">
-          <select name="country">
+          <select name="country" formControlName="country">
             <option hidden>Country</option>
             <option>America</option>
             <option>Japan</option>
@@ -60,11 +63,11 @@
             <option>Nepal</option>
           </select>
         </div>
-        <input type="text" placeholder="City" />
+        <input type="text" placeholder="City" formControlName="city"/>
       </div>
       <div class="column">
-        <input type="text" placeholder="Region" />
-        <input type="number" placeholder="Postal code" />
+        <input type="text" placeholder="Region" formControlName="region"/>
+        <input type="number" placeholder="Postal code" formControlName="postalCode"/>
       </div>
     </div>
 
@@ -74,7 +77,7 @@
       <div class="column">
         <input type="text" placeholder="Add Skill...">
         <button type="button" class="btn-add-delete">Delete</button>
-      </div> 
+      </div>
     </div>
     <button type="button" class="btn-add-delete">Add Skills</button>
 
@@ -104,7 +107,7 @@
     </div>
     <button type="button" class="btn-add-delete">Add Experience</button>
 
-    <input type="submit" value="Submit" class="submit-btn"> 
+    <input type="submit" value="Submit" class="submit-btn" [disabled]="employeeForm.invalid">
     <!-- [disabled]="!reactiveForm.valid" -->
   </form>
 </section>
