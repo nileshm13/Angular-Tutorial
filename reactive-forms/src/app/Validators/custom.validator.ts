@@ -1,4 +1,4 @@
-import { FormControl } from "@angular/forms";
+import { AbstractControl, FormControl } from "@angular/forms";
 
 //Create a const variable noSpaceValidator
 //Assign a function to it
@@ -17,6 +17,18 @@ export class CustomValidator {
             return { noSpace: true }
         }
         return null;
+    }
+
+    static usrNameAvailable(control: AbstractControl) {
+        let takenUserNames = ['nilesh13', 'mahesh10', 'rakesh7'];
+        return new Promise((resolve, reject) => {
+            if (takenUserNames.includes(control.value?.toLowerCase())) {
+                return resolve({ usrNameUnavailable: true })
+            }
+            else {
+                return resolve(null);
+            }
+        })
     }
 
 }

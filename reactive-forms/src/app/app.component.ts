@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomValidator } from './Validators/no-space.validator';
+import { CustomValidator } from './Validators/custom.validator';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
       fname: new FormControl(null, [Validators.required, CustomValidator.noSpace]),
       lname: new FormControl(null, [Validators.required, CustomValidator.noSpace]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      usrname: new FormControl(null),
+      usrname: new FormControl(null,[], CustomValidator.usrNameAvailable),
       dob: new FormControl(null),
       gender: new FormControl('male'),
       address: new FormGroup({
