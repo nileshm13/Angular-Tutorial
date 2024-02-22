@@ -32,3 +32,8 @@ Add/Remove element to FormArray:
 this.employeeForm.get('skills') where skills is a FormArray has return type of AbstractControl which includes FormControl,FormGroup, FormArray. To add an element we need to push and to remove using an index, we need removeAt. These extensions are not available under AbstractControl, so we typecast and use it like:
 (<FormArray>this.employeeForm.get('skills')).push(new FormControl(null));
 (<FormArray>this.employeeForm.get('skills')).removeAt(index);
+
+Custom Validators:
+They are of 2 types: Sync and Async, by default, angular does not have async validators. Async validators returns Observables/promise.
+Validator is basically a static method which contains logic for validating input. This can be used with form element.
+See Async Validator.png

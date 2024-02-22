@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { noSpaceValidator } from './Validators/no-space.validator';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.employeeForm = new FormGroup({
-      fname: new FormControl(null, Validators.required),
-      lname: new FormControl(null, Validators.required),
+      fname: new FormControl(null, [Validators.required, noSpaceValidator]),
+      lname: new FormControl(null, [Validators.required, noSpaceValidator]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       usrname: new FormControl(null),
       dob: new FormControl(null),
