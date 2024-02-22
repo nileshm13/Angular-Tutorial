@@ -5,11 +5,13 @@
     <div class="column">
       <div class="input-box">
         <input type="text" placeholder="First Name" formControlName="fname" />
-        <small *ngIf="employeeForm.get('fname').invalid && employeeForm.get('fname').touched">*First Name is required</small>
+        <small *ngIf="employeeForm.get('fname').invalid && employeeForm.get('fname').touched">*First Name is
+          required</small>
       </div>
       <div class="input-box">
         <input type="text" placeholder="Last Name" formControlName="lname" />
-        <small *ngIf="employeeForm.get('lname').invalid && employeeForm.get('lname').touched">*Last Name is required</small>
+        <small *ngIf="employeeForm.get('lname').invalid && employeeForm.get('lname').touched">*Last Name is
+          required</small>
       </div>
     </div>
 
@@ -36,23 +38,23 @@
       <h3>Gender</h3>
       <div class="gender-option">
         <div class="gender">
-          <input type="radio" value="male" id="check-male" formControlName="gender"/>
+          <input type="radio" value="male" id="check-male" formControlName="gender" />
           <label for="check-male">Male</label>
         </div>
         <div class="gender">
-          <input type="radio" value="female" id="check-female" formControlName="gender"/>
+          <input type="radio" value="female" id="check-female" formControlName="gender" />
           <label for="check-female">Female</label>
         </div>
         <div class="gender">
-          <input type="radio" value="other" id="check-other" formControlName="gender"/>
+          <input type="radio" value="other" id="check-other" formControlName="gender" />
           <label for="check-other">Prefer not to say</label>
         </div>
       </div>
     </div>
 
-    <div class="input-box address">
+    <div class="input-box address" formGroupName="address">
       <label>Address</label>
-      <input type="text" placeholder="Street address" formControlName="streetAddress"/>
+      <input type="text" placeholder="Street address" formControlName="streetAddress" />
       <div class="column">
         <div class="select-box">
           <select name="country" formControlName="country">
@@ -63,23 +65,35 @@
             <option>Nepal</option>
           </select>
         </div>
-        <input type="text" placeholder="City" formControlName="city"/>
+        <input type="text" placeholder="City" formControlName="city" />
       </div>
       <div class="column">
-        <input type="text" placeholder="Region" formControlName="region"/>
-        <input type="number" placeholder="Postal code" formControlName="postalCode"/>
+        <input type="text" placeholder="Region" formControlName="region" />
+        <input type="number" placeholder="Postal code" formControlName="postalCode" />
+      </div>
+      <div>
+        <small
+          *ngIf="(employeeForm.get('address.streetAddress').invalid && employeeForm.get('address.streetAddress').touched) || (employeeForm.get('address.city').invalid && employeeForm.get('address.city').touched) || (employeeForm.get('address.postalCode').invalid && employeeForm.get('address.postalCode').touched)">
+          *Address, City and Postal Code is required
+        </small>
       </div>
     </div>
 
     <!--HTML for Skills Form Array -->
     <div class="input-box skills" formArrayName="skills">
       <h4>Add Skills</h4>
-      <div class="column">
-        <input type="text" placeholder="Add Skill...">
-        <button type="button" class="btn-add-delete">Delete</button>
+      <div class="column" *ngFor="let skill of employeeForm.get('skills')['controls']; let i = index">
+        <!-- proprety binding used for formControlName as name assigned dynamically using index -->
+        <input type="text" placeholder="Add Skill..." [formControlName]="i">
+        <button *ngIf="employeeForm.get('skills')['controls'].length > 1" type="button" class="btn-add-delete"
+          (click)="deleteSkill(i)">Delete</button>
       </div>
     </div>
-    <button type="button" class="btn-add-delete">Add Skills</button>
+    <button type="button" class="btn-add-delete" (click)="addSkill()">Add More Skills</button>
+    <div>
+      <small *ngIf="employeeForm.get('skills').touched && employeeForm.get('skills').invalid ">*Please add atleast one
+        skill</small>
+    </div>
 
     <!--HTML for Experience Form Array -->
     <div class="input-box">
@@ -107,7 +121,7 @@
     </div>
     <button type="button" class="btn-add-delete">Add Experience</button>
 
-    <input type="submit" value="Submit" class="submit-btn" [disabled]="employeeForm.invalid">
+    <input type="submit" value="Submit" class="submit-btn">
     <!-- [disabled]="!reactiveForm.valid" -->
   </form>
 </section>
