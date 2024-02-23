@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { TaskModel } from 'src/app/Models/Task';
 
 @Component({
   selector: 'app-create-task',
@@ -8,8 +10,15 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class CreateTaskComponent {
   @Output()
   CloseForm: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  submitFormEvent: EventEmitter<TaskModel> = new EventEmitter<TaskModel>();
+  @ViewChild('taskForm') taskForm: NgForm;
 
-  OnCloseForm(){
+  OnCloseForm() {
     this.CloseForm.emit(false);
+  }
+
+  submitTask() {
+    this.submitFormEvent.emit(this.taskForm.value);
   }
 }
