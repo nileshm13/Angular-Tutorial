@@ -1,8 +1,5 @@
-<app-create-task 
-        *ngIf="showCreateTaskForm" 
-        (CloseForm)="CloseCreateTaskForm()"
-        (submitFormEvent) = "submitTaskForm($event)"
-></app-create-task>
+<app-create-task *ngIf="showCreateTaskForm" (CloseForm)="CloseCreateTaskForm()"
+    (submitFormEvent)="submitTaskForm($event)"></app-create-task>
 
 <div class="dashboard-container">
     <div style="display: flex;">
@@ -19,28 +16,24 @@
     <hr>
 
     <div class="dashboard-item-container">
-            <div class="task-item task-open">
-                <div class="task-title">
-                    <h3>Task Title</h3>
-                </div>
-                <p><b>Assigned to: </b>John Smith</p>
-                <p><b>Priority: </b>High</p>
-                <p><b>Status: </b>In Progress</p>
-                <div class="task-action-icons">
-                    <button class="task-action-btn" title="Detail">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                    </button>
-                    <button class="task-action-btn" title="Edit">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    </button>
-                    <button class="task-action-btn" title="Delete">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>            
-                </div>
+        <div class="task-item task-open">
+            <div class="task-title">
+                <h3>Task Title</h3>
             </div>
+            <p><b>Assigned to: </b>John Smith</p>
+            <p><b>Priority: </b>High</p>
+            <p><b>Status: </b>In Progress</p>
+            <div class="task-action-icons">
+                <button class="task-action-btn" title="Detail">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </button>
+                <button class="task-action-btn" title="Edit">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+                <button class="task-action-btn" title="Delete">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
-
