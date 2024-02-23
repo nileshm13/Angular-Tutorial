@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
       lname: new FormControl(null, [Validators.required, CustomValidator.noSpace]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       usrname: new FormControl(null, Validators.required, CustomValidator.usrNameAvailable),
-      dob: new FormControl(null,Validators.required),
+      dob: new FormControl(null, Validators.required),
       gender: new FormControl('male'),
       address: new FormGroup({
         streetAddress: new FormControl(null, Validators.required),
@@ -30,9 +30,12 @@ export class AppComponent implements OnInit {
       }),
       skills: new FormArray([
         new FormControl(null, Validators.required)
+      ]),
+      experience: new FormArray([
       ])
     });
 
+    console.log(this.employeeForm.get('experience'));
     //#region valueChanges
     // this.employeeForm.valueChanges.subscribe((data) => {
     //   console.log(data);
@@ -54,11 +57,10 @@ export class AppComponent implements OnInit {
     //#endregion
   }
 
-  submitDetails() {
-    console.log(this.employeeForm);
+  submitDetails() {    
     //Assigning Form Value to an object
     this.employeeDetails = this.employeeForm.value;
-    // console.log(this.employeeDetails);
+    console.log(this.employeeDetails);
 
     //Resetting a form
     this.employeeForm.reset({
@@ -119,5 +121,20 @@ export class AppComponent implements OnInit {
     //#region patchValue for FormControl
     this.employeeForm.get('usrname').patchValue(this.employeeForm.get('fname').value + this.employeeForm.get('lname').value + date.getMilliseconds().toString());
     //#endregion
+  }
+
+  addExperience() {
+    let formGrp = new FormGroup({
+      company: new FormControl(null),
+      position: new FormControl(null),
+      experience: new FormControl(null),
+      startDate: new FormControl(null),
+      endDate: new FormControl(null)
+    });
+    (<FormArray>this.employeeForm.get('experience')).push(formGrp);
+  }
+
+  deleteExperience(index) {
+    (<FormArray>this.employeeForm.get('experience')).removeAt(index);
   }
 } 
