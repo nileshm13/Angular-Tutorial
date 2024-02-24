@@ -10,5 +10,6 @@ It takes a third optional argument headers which we specify as obj like {headers
 4. GET          this.http.get(url)
 It is used to get the resources from specified URL. We only need to provide URL and entire content is available. When used with Firebase, it returns a key-value pair, key is randomly generated string, value is entire object which you posted available as a JSON object. Before subscribing to it, we can use pipe operator with map, etc. to manipulate the data.
 
-5. Display in UI
-Chain pipe map to response, assign to array variable, use that to display in UI, show color of task bsaed on status. Ensure once task is created, new task should be visible
+6. DELETE       this.hrrp.delete(url)
+Specify the Url to delete everything (friebaseurl/tasks.json), and if specific item needs deletion, use id of that item (firebaseurl/tasks/id.json). Using id.json as each collection is a json object in itself.
+
