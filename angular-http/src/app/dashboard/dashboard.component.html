@@ -1,5 +1,5 @@
 <app-create-task *ngIf="showCreateTaskForm" (CloseForm)="CloseCreateTaskForm()"
-    (submitFormEvent)="submitTaskForm($event)"></app-create-task>
+    (submitFormEvent)="submitTaskForm($event)" [isModeEdit]="isFormEdit" [editedTask]="editedTask"></app-create-task>
 
 <div class="dashboard-container">
     <div style="display: flex;">
@@ -32,7 +32,7 @@
                     <button class="task-action-btn" title="Detail">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                     </button>
-                    <button class="task-action-btn" title="Edit">
+                    <button class="task-action-btn" title="Edit" (click)="editTask(task.id)">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     </button>
                     <button class="task-action-btn" title="Delete" (click)="deleteTask(task.id)">
