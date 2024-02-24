@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   http: HttpClient = inject(HttpClient);
   firebaseURL: string = 'https://angularhttp-c69fb-default-rtdb.firebaseio.com';
   taskList: TaskModel[] = [];
+  isLoading: boolean = false;
 
   ngOnInit() {
     this.getTasks();
@@ -41,16 +42,30 @@ export class DashboardComponent implements OnInit {
   }
 
   getTasks() {
+    this.isLoading = true;
     let getURL = this.firebaseURL + '/tasks.json'
     let tasks = [];
     this.http.get(getURL).pipe(map((response) => {
       for (let key in response) {
-        tasks.push({ ...response[key], 'id': key });        
+        tasks.push({ ...response[key], 'id': key });
       }
       return tasks;
     }))
       .subscribe((tasksArr) => {
-        this.taskList = tasksArr;        
+        this.taskList = tasksArr;
+        this.isLoading = false;
       });
-  }  
+  }
+
+  deleteAllTasks() {
+    let deleteURL = this.firebaseURL + '/tasks.json';
+    this.http.delete(deleteURL).subscribe();  //As it returns null on successful execution, not using callback as value returned is of no use
+  }
+
+  deleteTask(id: string) {
+    let deleteURL = this.firebaseURL + '/tasks/' + id + '.json';
+    this.http.delete(deleteURL).subscribe((res) => {
+      console.log(res);
+    });
+  }
 }
