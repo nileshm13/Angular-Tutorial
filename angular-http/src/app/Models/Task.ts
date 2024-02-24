@@ -1,9 +1,9 @@
 export class TaskModel {
-    id: string
-    assignedTo: string
-    createdOn: string
-    description: string
-    priority: string
-    status: string
-    title: string    
+    public id: string
+    public assignedTo: string
+    public createdOn: string
+    public description: string
+    public priority: string
+    public status: string
+    public title: string
 }
