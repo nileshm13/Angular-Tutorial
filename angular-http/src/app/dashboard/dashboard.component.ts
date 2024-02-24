@@ -135,9 +135,7 @@ export class DashboardComponent implements OnInit {
     }
     setTimeout(() => {
       this.errorMessage = null;
-    }, 3000);
-    let errorObj: ErrorModel = { errorCode: responseError.status, errorMessage: responseError.message, dateTime: new Date() }
-    this.loggingService.addErrorLogs(errorObj).subscribe();
+    }, 3000);    
   }
 
   getErrorLogs() {
