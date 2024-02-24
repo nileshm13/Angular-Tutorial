@@ -1,0 +1,14 @@
+https://angularhttp-c69fb-default-rtdb.firebaseio.com/
+
+1. In order to access http which can call PUT,POST,DELETE,etc. , import HttpClientModule in app.module.ts and inject HttpClient in component. This returns an observable, so as long as subscription is not done, http call will not be made. Specifying return type to observable is a good practice like this.http.POST<string>.
+
+2. POST         this.http.post(url, data, headers?)
+In firebase, we have NoSQL database, each row is actually a collection. A collection is a list of json objects, so we specify task.json at end of url when using POST. If a collection already exists, it will add new record to it, if it does not exist, it will create a new one on firebse URL specified on top with collection name "tasks"(which is specified in URL). 
+POST takes 2 mandatory parameters, url and data. POST automatically converts data passed to json. Whenever a POST request is made, browser automatically makes a request of type Options, if it gets 200(success) as response for it, only then it goes ahead and make a POST request. Options basically checks if POST request is allowed to be sent to server or not. 
+It takes a third optional argument headers which we specify as obj like {headers: {'test-header':'val1'}}. Another approach is to define headersObj variable of type HTTPHeaders inside which we specify header name as key-value pair. Multiple headers can be added separated by ,
+
+4. GET          this.http.get(url)
+It is used to get the resources from specified URL. We only need to provide URL and entire content is available. When used with Firebase, it returns a key-value pair, key is randomly generated string, value is entire object which you posted available as a JSON object. Before subscribing to it, we can use pipe operator with map, etc. to manipulate the data.
+
+5. Display in UI
+Chain pipe map to response, assign to array variable, use that to display in UI, show color of task bsaed on status. Ensure once task is created, new task should be visible
