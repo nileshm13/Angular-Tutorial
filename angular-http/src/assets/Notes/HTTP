@@ -1,5 +1,12 @@
 https://angularhttp-c69fb-default-rtdb.firebaseio.com/
 
+{
+  "rules": {
+    ".read": "now < 1711218600000",  // 2024-3-24
+    ".write": "now < 1711218600000",  // 2024-3-24
+  }
+}
+
 1. In order to access http which can call PUT,POST,DELETE,etc. , import HttpClientModule in app.module.ts and inject HttpClient in component. This returns an observable, so as long as subscription is not done, http call will not be made. Specifying return type to observable is a good practice like this.http.POST<string>. Its a good practive to write these http methods in service class as cmp is for design logic.
 
 2. POST         this.http.post(url, data, headers?)

@@ -3,14 +3,17 @@
 <app-task-details (showTaskDetailsEvent)="showTaskDetails($event)" *ngIf="showDetails" [selectedTask] = "selectedTask"></app-task-details>
 
 <div class="dashboard-container">
+    <div class="sb sb-error" *ngIf="errorMessage != null">{{errorMessage}}</div>
+
     <div style="display: flex;">
         <div style="width: 50%">
             <h2>Dashboard</h2>
         </div>
         <div style="width: 50%; text-align: right;">
-            <button class="create-task-btn" (click)="OpenCreateTaskForm()">Create Task</button>
+            <button class="create-task-btn" (click)="OpenCreateUpdateTaskForm()">Create Task</button>
             <button class="create-task-btn" (click)="getTasks()">Fetch Tasks</button>
             <button class="create-task-btn" (click)="deleteAllTasks()">Clear Tasks</button>
+            <button class="create-task-btn" (click)="getErrorLogs()" *ngIf="false">Error Logs</button>
         </div>
     </div>
 
@@ -42,5 +45,5 @@
                 </div>
             </div>
         </ng-container>
-    </div>
+    </div>    
 </div>
