@@ -8,10 +8,24 @@ POST takes 2 mandatory parameters, url and data. POST automatically converts dat
 It takes a third optional argument headers which we specify as obj like {headers: {'test-header':'val1'}}. Another approach is to define headersObj variable of type HTTPHeaders inside which we specify header name as key-value pair. Multiple headers can be added separated by ,
 
 3. GET          this.http.get(url)
-It is used to get the resources from specified URL. We only need to provide URL and entire content is available. When used with Firebase, it returns a key-value pair, key is randomly generated string, value is entire object which you posted available as a JSON object. Before subscribing to it, we can use pipe operator with map, etc. to manipulate the data.
+It is used to get the resources from specified URL. We only need to provide URL and entire content is available. When used with Firebase, it returns a key-value pair, key is randomly generated string, value is entire object which you posted available as a JSON object. Before subscribing to it, we can use pipe operator with map, etc. to manipulate the data. For get by id, specify id like we do in PUT.
 
 4. DELETE       this.http.delete(url)
 Specify the Url to delete everything (firebaseurl/tasks.json), and if specific item needs deletion, use id of that item (firebaseurl/tasks/id.json). Using id.json as each collection is a json object in itself.
 
 5. UPDATE       this.http.update(url, data)
 It takes 2 mandatory parameters, url and json object to be updated. In the URL, we would need id of the object we have to update. 
+
+6. Headers and Query Params
+#Headers
+To set headers, there are 2 ways: set and append. If you specify maultiple values with same header key name, set will overwrite and only the most recent one will get assigned. append will add to exisitng list. It can be assigned using HttpHeaders object.
+let reqHeaders = new HttpHeaders();
+reqHeaders = reqHeaders.set('test-header1','header-value1');
+reqHeaders = reqHeaders.append('test-header1','header-value3');
+
+#QueryParams:
+To specify Query params, use object of HttpParams, rest of the concepts are same as headers, like we use set and append.
+queryParams = queryParams.set('page', '2');
+queryParams = queryParams.append('page', '3');
+With append, result looks like: 
+https://angularhttp-c69fb-default-rtdb.firebaseio.com/tasks.json?page=2&page=3&items=10&items=15

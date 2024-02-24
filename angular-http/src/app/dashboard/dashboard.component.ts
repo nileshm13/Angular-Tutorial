@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
   isFormEdit: boolean = false;
   editedTask: TaskModel;
   editedTaskId: string;
+  showDetails: boolean = false;
+  selectedTask: TaskModel;
 
   ngOnInit() {
     this.getTasks();
@@ -75,5 +77,16 @@ export class DashboardComponent implements OnInit {
     this.editedTaskId = this.editedTask.id;
     this.showCreateTaskForm = true;
     this.isFormEdit = true;
+  }
+
+  getTaskDetails(id: string) {
+    this.showDetails = true;
+    this.taskService.getTaskDetailsById(id).subscribe((res) => {
+      this.selectedTask = res;      
+    });
+  }
+
+  showTaskDetails(value: boolean) {
+    this.showDetails = value;
   }
 }
