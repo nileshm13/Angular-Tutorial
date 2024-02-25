@@ -14,6 +14,8 @@ import { LoggingInterceptor } from './Services/logging-interceptor.service';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RouteModule } from './app-routing.module';
+import { LoaderComponent } from './utility/loader/loader.component';
+import { ErrorSnackbarComponent } from './utility/error-snackbar/error-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { RouteModule } from './app-routing.module';
     CreateTaskComponent,
     TaskDetailsComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    LoaderComponent,
+    ErrorSnackbarComponent
   ],
   imports: [
     BrowserModule,

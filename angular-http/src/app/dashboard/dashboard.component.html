@@ -1,10 +1,10 @@
 <app-create-task *ngIf="showCreateTaskForm" (CloseForm)="CloseCreateTaskForm()"
     (submitFormEvent)="submitTaskForm($event)" [isModeEdit]="isFormEdit" [editedTask]="editedTask"></app-create-task>
-<app-task-details (showTaskDetailsEvent)="showTaskDetails($event)" *ngIf="showDetails" [selectedTask] = "selectedTask"></app-task-details>
+<app-task-details (showTaskDetailsEvent)="showTaskDetails($event)" *ngIf="showDetails"
+    [selectedTask]="selectedTask"></app-task-details>
+<app-error-snackbar *ngIf="errorMessage" [errorMessage]="errorMessage"></app-error-snackbar>
 
 <div class="dashboard-container">
-    <div class="sb sb-error" *ngIf="errorMessage != null">{{errorMessage}}</div>
-
     <div style="display: flex;">
         <div style="width: 50%">
             <h2>Dashboard</h2>
@@ -20,11 +20,11 @@
     <hr>
 
     <div class="dashboard-item-container">
-        <div class="loader" *ngIf="isLoading"></div>
-        <div *ngIf="taskList.length < 1">
-            <h2>No Tasks added yet</h2>
-        </div>
+        <app-loader *ngIf="isLoading"></app-loader>
         <ng-container *ngIf="!isLoading">
+            <div *ngIf="taskList.length < 1">
+                <h2>No Tasks added yet</h2>
+            </div>
             <div class="task-item" [ngClass]="'task-' + task.status" *ngFor="let task of taskList">
                 <div class="task-title">
                     <h3>{{task.title}}</h3>
@@ -45,5 +45,5 @@
                 </div>
             </div>
         </ng-container>
-    </div>    
+    </div>
 </div>

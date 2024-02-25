@@ -5,7 +5,7 @@ export class CustomInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log("inside custom interceptor");
         let modifiedHeaders = new HttpHeaders();
-        modifiedHeaders = modifiedHeaders.append('Intercept-header-request', 'true').append('Intercept-header-response', 'false');
+        // modifiedHeaders = modifiedHeaders.append('Intercept-header-request', 'true').append('Intercept-header-response', 'false');        
         var modifiedRequest = req.clone({ headers: modifiedHeaders });
         console.log(req);
         console.log(modifiedRequest);
