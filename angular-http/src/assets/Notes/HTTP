@@ -42,4 +42,8 @@ https://angularhttp-c69fb-default-rtdb.firebaseio.com/tasks.json?page=2&page=3&i
 In order to hadnle error, we can use 2nd param of callback which handles error. Error is a HTTPErrorResponseObject, which contains statusCode, message, errorDetails amongst other things.
 
 #CatchError way:
-Use a pipe after making http call just before using subscribe. It accepts a callback as an argument, in that callback we can receive the error response. Its an rxJS operator. We can use this to handle http based error messages amongst others. This helps in separation of concerns, component error block just handles error message to be displayed on screen whereas catchError takes care of logging in database.
+Use a pipe after making http call just before using subscribe. It accepts a callback as an argument, in that callback we can receive the error response.
+Its an rxJS operator. We can use this to handle http based error messages amongst others.
+This helps in separation of concerns, component error block just handles error message to be displayed on screen whereas catchError takes care of logging in database.
+It must return throwError which creates an observable. It will create an error instance and push it to the consumer as an error immediately upon subscription. 
+return throwError(() => err);
