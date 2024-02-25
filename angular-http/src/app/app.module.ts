@@ -11,6 +11,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TaskDetailsComponent } from './dashboard/task-details/task-details.component';
 import { CustomInterceptor } from './Services/custom-interceptor.service';
 import { LoggingInterceptor } from './Services/logging-interceptor.service';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { RouteModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { LoggingInterceptor } from './Services/logging-interceptor.service';
     FooterComponent,
     DashboardComponent,
     CreateTaskComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouteModule
   ],
   //multi: true here ensures all the interceptors listed in providers array get executed one after another in order they are specified
   // instead of overwriting one/another, Mixing multi true and false is not allowed.
