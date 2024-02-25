@@ -9,6 +9,8 @@ import { CreateTaskComponent } from './dashboard/create-task/create-task.compone
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TaskDetailsComponent } from './dashboard/task-details/task-details.component';
+import { CustomInterceptor } from './Services/custom-interceptor.service';
+import { LoggingInterceptor } from './Services/logging-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,13 @@ import { TaskDetailsComponent } from './dashboard/task-details/task-details.comp
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  //multi: true here ensures all the interceptors listed in providers array get executed one after another in order they are specified
+  // instead of overwriting one/another, Mixing multi true and false is not allowed.
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

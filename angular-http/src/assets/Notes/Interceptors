@@ -1,0 +1,16 @@
+Interceptors:
+
+1. It is used to intercept a request before sending it to server(like adding headers, tokens, etc.) or to intercept a response(logging the reponse befpre display, etc.). Thus, it helps in intercepting before a logic is performed.
+2. If we dont use it, we might have to add headers in each http call we make, this ensures a common place so that all http goes through this. If we want to avoid few urls using this, we can add conditon inside interceptors like: if req.url !== 'our url' { then execute logic}
+
+3. Implementation: Interceptors need to be implemented as a service, though we dont provide @Injectable decorator to them. Also, it should provide implementation for HttpInterceptor interface which makes creation of intercept(httpRequest req, httphandler handler) method mandatory. Once done, we need to register in providers array.
+intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {}
+ providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}  
+]
+multi: true here ensures all the interceptors listed in providers array get executed one after another "in order they are specified", instead of overwriting one/another, Mixing multi true and false is not allowed. HTTP_INTERCEPTORS is a built in token, useClass specify which class needs to be executed for interceptor.
+If next.handle not called, it wont be forwarded to next interceptor/server, request will remain within the interceptor, hence ensure to call it and return it from method.
+If we do not want interceptor logic for a specific method, we can use req.url !== 'our url' {execute logic}
+
+4. We can create a clone of actual req by using req.clone({headers: req.headers.append('auth','')}) --> this will append auth header to original request ensuring we are not manipulating original request but its clone. Use this in next.handle. Use pipe after this and tap into event, this will list all the events taking place while sending request and accepting response. Compare if event type matches response, log details like event and body. Refer to custom-interceptor.service.ts for detailed implementation
