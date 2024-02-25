@@ -1,17 +1,35 @@
 <div class="app-login-form">
-    <h2>Login Here</h2>
-    <form>
-        <div class="form-input">
-            <label>Email Address</label>
-            <input type="email" placeholder="Email address">
-        </div>
-        <div class="form-input">
-            <label>Password</label>
-            <input type="password" placeholder="Password">
-        </div>           
-        <button type="submit" class="app-login-btn">Login</button>
-        <p>Do not have an accout yet? 
-            <button class="app-toggle-btn">Register Here.</button>
-        </p>
-    </form>
+    <h2>{{isLoginMode ? 'Login Here' : 'Register New User' }}</h2>
+    <app-loader *ngIf="isLoading"></app-loader>
+    <app-error-snackbar *ngIf="errorMessage" [errorMessage]="errorMessage"></app-error-snackbar>   
+        <form #loginRegisterForm="ngForm" (ngSubmit)="submitDetails()" *ngIf="!isLoading">
+            <div class="form-input">
+                <label>Email Address</label>
+                <input type="email" placeholder="Email address" [(ngModel)]="emailAddress" name="emailAddress"
+                    #emailAddr="ngModel" required email>
+                <div>
+                    <small style="color: red;" *ngIf="emailAddr.touched && emailAddr.errors?.['required']">Please enter
+                        Email Address</small>
+                    <small style="color: red;" *ngIf="emailAddr.touched && emailAddr.errors?.['email']">Please enter
+                        valid
+                        Email Address</small>
+                </div>
+            </div>
+            <div class="form-input">
+                <label>Password</label>
+                <input type="password" placeholder="Password" [(ngModel)]="password" name="password" #passwd="ngModel"
+                    minlength="8" required>
+                <div *ngIf="passwd.invalid && passwd.touched">
+                    <small style="color: red;" *ngIf="passwd.errors?.['required']">Please enter Password</small>
+                    <small style="color: red;" *ngIf="passwd.errors?.['minlength']">Passwod should have minimum 8
+                        characters</small>
+                </div>
+            </div>
+            <button type="submit" class="app-login-btn" [disabled]="loginRegisterForm.invalid">{{isLoginMode? 'Login' :
+                'Register'}}</button>
+            <p>{{isLoginMode ? 'Do not have an accout yet?' : 'Want to login?' }}
+                <button class="app-toggle-btn" type="button" (click)="changeMode()">
+                    {{isLoginMode ? 'Register Here' : 'Login Here' }}</button>
+            </p>
+        </form>
 </div>

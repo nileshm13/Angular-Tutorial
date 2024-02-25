@@ -1,6 +1,6 @@
 .app-login-form{
     width: 520px;
-    height: 360px;
+    height: 420px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 30px 30px;
     border-radius: 10px;
@@ -29,4 +29,11 @@
     background-color: transparent;
     color: #0e0ede;
     cursor: pointer;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
