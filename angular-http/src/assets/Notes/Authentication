@@ -1,0 +1,1 @@
+Angular sends username and password of user to server to validate, server creates a JSON Web token and sends it back to angular. Angular stores this web token in local storage/somewhere else and need to send it back with each request. As server created web token, it already knows it and hence can be used in authentication. Every login wil generate a unique json web token.

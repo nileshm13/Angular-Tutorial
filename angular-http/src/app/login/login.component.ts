@@ -1,7 +1,8 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, Inject, ViewChild, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoginService } from '../Services/login.service';
-import { RegisterUserResponse } from '../Models/RegisterUserResponse';
+import { AuthUserResponse } from '../Models/AuthUserResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   loginService: LoginService = inject(LoginService);
   isLoading: boolean = false;
   errorMessage: string;
+  router: Router = inject(Router);
 
   changeMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -26,9 +28,10 @@ export class LoginComponent {
     if (this.isLoginMode) {
       this.isLoading = true;
       this.loginService.loginUser(this.emailAddress, this.password).subscribe({
-        next: () => {
+        next: (res) => {
           this.isLoading = false;
-          alert('Login Successful');
+          console.log('Login Successful');
+          this.router.navigate(['']);
         },
         error: (err) => {
           this.isLoading = false;
@@ -39,9 +42,9 @@ export class LoginComponent {
     else {
       this.isLoading = true;
       this.loginService.registerNewUser(this.emailAddress, this.password).subscribe({
-        next: (res: RegisterUserResponse) => {
+        next: (res: AuthUserResponse) => {
           this.isLoading = false;
-          alert('User Registeration Successful');
+          this.router.navigate(['']);
         },
         error: (err) => {
           this.setErrorMessage(err);
