@@ -1,8 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { RegisterUserRequest } from "../Models/RegisterUserRequest";
-import { catchError, throwError } from "rxjs";
+import { AuthUserRequest } from "../Models/AuthUserRequest";
+import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
 import { getCurrencySymbol } from "@angular/common";
+import { AuthUserResponse } from "../Models/AuthUserResponse";
+import { UserModel } from "../Models/UserModel";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +15,8 @@ export class LoginService {
     signupURL: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGzQu3ifk4m5i_OYSAA24JttZ7846825s';
     loginURL: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGzQu3ifk4m5i_OYSAA24JttZ7846825s';
     errorMsg: string;
+    loggedInUser = new BehaviorSubject<UserModel>(null);
+    router: Router = inject(Router);
 
     registerNewUser(usrName: string, passwd: string) {
         let data = this.getRequest(usrName, passwd);
@@ -37,7 +42,11 @@ export class LoginService {
             console.log(this.errorMsg);
             //THROWERROR IS A CALLBACK WITHOUT {}   
             return throwError(() => this.errorMsg);
-        }));
+        }),
+            tap((response: AuthUserResponse) => {
+                this.handleUserLogin(response);
+            })
+        );
     }
 
     loginUser(usrName: string, passwd: string) {
@@ -60,11 +69,30 @@ export class LoginService {
                 }
             }
             return throwError(() => this.errorMsg);
-        }))
+        }),
+            tap((response: AuthUserResponse) => {
+                this.handleUserLogin(response);
+            })
+        )
     }
 
     private getRequest(username: string, password: string) {
-        let data: RegisterUserRequest = { email: username, password: password, returnSecureToken: true }
+        let data: AuthUserRequest = { email: username, password: password, returnSecureToken: true }
         return data;
+    }
+
+    private handleUserLogin(response: AuthUserResponse) {
+        //expiresIn is total seconds returned as string, so converting it into milliseconds, and converting it into date format to get date time
+        //when session is expected to expire
+        let expiresInDate = new Date(new Date().getTime() + Number(response.expiresIn) * 1000);
+        var user = new UserModel(response.localId, response.email, expiresInDate, response.idToken);
+        this.loggedInUser.next(user);
+        console.log(this.loggedInUser);
+    }
+
+    logOut()
+    {
+        this.loggedInUser.next(null);
+        this.router.navigate(['login']);
     }
 }
