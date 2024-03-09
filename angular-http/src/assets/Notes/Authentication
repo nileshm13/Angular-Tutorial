@@ -19,3 +19,5 @@ localStorage.clear()                //clears all the localStorage data
 localStorage.removeItem(key)        //removes a localStorage item based on key
 
 6. AutoLogout: Logout the user as soon as token expires, so write a setTimeOut function to do the same. If user clicks logout on its own, its important to assign this setTimeOut to a variable and do clearTimeOut(varName) else the timer keeps ticking and logout will be called after expiration. Also, assign varname as null.
+
+7. An auth guard can be created wherin access to dashboard is restricted using canActivate, here, we check if user is logged in, then allow access else redirect to login page.
