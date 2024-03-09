@@ -20,7 +20,9 @@ export class LoginService {
 
     registerNewUser(usrName: string, passwd: string) {
         let data = this.getRequest(usrName, passwd);
-        return this.http.post(this.signupURL, data).pipe(catchError((err) => {
+        return this.http.post(this.signupURL, data).pipe(tap((response: AuthUserResponse) => {
+            this.handleUserLogin(response);
+        }), catchError((err) => {
             this.errorMsg = "Unknown error occured, please contact support team"
             console.log(err);
             if (err.error && err.error.error) {
@@ -43,15 +45,14 @@ export class LoginService {
             //THROWERROR IS A CALLBACK WITHOUT {}   
             return throwError(() => this.errorMsg);
         }),
-            tap((response: AuthUserResponse) => {
-                this.handleUserLogin(response);
-            })
         );
     }
 
     loginUser(usrName: string, passwd: string) {
         let data = this.getRequest(usrName, passwd);
-        return this.http.post(this.loginURL, data).pipe(catchError((err) => {
+        return this.http.post(this.loginURL, data).pipe(tap((response: AuthUserResponse) => {
+            this.handleUserLogin(response);
+        }), catchError((err) => {
             if (err.error && err.error.error) {
                 switch (err.error.error.message) {
                     case 'EMAIL_NOT_FOUND': {
@@ -69,10 +70,7 @@ export class LoginService {
                 }
             }
             return throwError(() => this.errorMsg);
-        }),
-            tap((response: AuthUserResponse) => {
-                this.handleUserLogin(response);
-            })
+        })
         )
     }
 
@@ -88,10 +86,19 @@ export class LoginService {
         var user = new UserModel(response.localId, response.email, expiresInDate, response.idToken);
         this.loggedInUser.next(user);
         console.log(this.loggedInUser);
+        localStorage.setItem('user', JSON.stringify(user));
     }
 
-    logOut()
-    {
+    isLoggedIn() {
+        let usr = JSON.parse(localStorage.getItem('user'));
+        let userDetail = new UserModel(usr.userId, usr.email, usr.expiresIn, usr._tokenId);
+        if (!userDetail.token) {
+            return;
+        }
+        this.loggedInUser.next(userDetail);
+    }
+
+    logOut() {
         this.loggedInUser.next(null);
         this.router.navigate(['login']);
     }
