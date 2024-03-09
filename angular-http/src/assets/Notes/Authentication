@@ -1,1 +1,19 @@
-Angular sends username and password of user to server to validate, server creates a JSON Web token and sends it back to angular. Angular stores this web token in local storage/somewhere else and need to send it back with each request. As server created web token, it already knows it and hence can be used in authentication. Every login wil generate a unique json web token.
+1. Angular sends username and password of user to server to validate, server creates a JSON Web token and sends it back to angular. Angular stores this web token in local storage/somewhere else and need to send it back with each request. As server created web token, it already knows it and hence can be used in authentication. Every login wil generate a unique json web token.
+
+2. Here, we are using firebase, we send a POST request to create new user/login a user. In response, we get an object which has:
+(https://firebase.google.com/docs/reference/rest/auth#section-create-email-password)
+idToken	        string	    A Firebase Auth ID token for the newly created user.
+email	        string	    The email for the newly created user.
+refreshToken	string	    A Firebase Auth refresh token for the newly created user.
+expiresIn	    string	    The number of seconds in which the ID token expires.
+localId	        string	    The uid of the newly created user.
+
+3. We can use tokenId and expiresIn to check if user is still logged in or not. Keep this two private and use getter/setter property to access it.
+
+4. Its a good idea to set this response in locaStorage so that we can read it from there whenever page is refreshed, else user object will become empty and logged out.
+
+5. LocalStorage has few properties like:
+localStorage.setItem(key, value)    //value needs to be a string so convert model to string using JSON.stringify
+localStorage.getItem(key)           //return type is a string so convert it to model using JSON.parse(model)
+localStorage.clear()                //clears all the localStorage data
+localStorage.removeItem(key)        //removes a localStorage item based on key
