@@ -17,6 +17,7 @@ export class LoginService {
     errorMsg: string;
     loggedInUser = new BehaviorSubject<UserModel>(null);
     router: Router = inject(Router);
+    logOutTimer: any;
 
     registerNewUser(usrName: string, passwd: string) {
         let data = this.getRequest(usrName, passwd);
@@ -87,19 +88,39 @@ export class LoginService {
         this.loggedInUser.next(user);
         console.log(this.loggedInUser);
         localStorage.setItem('user', JSON.stringify(user));
+        this.autoLogOut(Number(response.expiresIn) * 1000);
+        //this.autoLogOut(Number(2000));
     }
 
     isLoggedIn() {
         let usr = JSON.parse(localStorage.getItem('user'));
-        let userDetail = new UserModel(usr.userId, usr.email, usr.expiresIn, usr._tokenId);
-        if (!userDetail.token) {
-            return;
+        if (usr) {
+            let userDetail = new UserModel(usr.userId, usr.email, usr._expiresIn, usr._tokenId);
+            if (!userDetail.token) {
+                return;
+            }
+            this.loggedInUser.next(userDetail);
+            let expiryTime = new Date(usr._expiresIn).getTime() - new Date().getTime();
+            this.autoLogOut(Number(expiryTime));
         }
-        this.loggedInUser.next(userDetail);
     }
 
     logOut() {
         this.loggedInUser.next(null);
+        localStorage.removeItem('user');
+        //Clear the timeout set on user login and set the object to null
+        if (this.logOutTimer) {
+            clearTimeout(this.logOutTimer);
+        }
+        this.logOutTimer = null;
         this.router.navigate(['login']);
+    }
+
+    //Log out the user on token expiry
+    autoLogOut(expiresIn: number) {
+        console.log(expiresIn);
+        this.logOutTimer = setTimeout(() => {
+            this.logOut();
+        }, expiresIn);
     }
 }
