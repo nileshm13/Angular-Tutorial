@@ -10,10 +10,12 @@ localId	        string	    The uid of the newly created user.
 
 3. We can use tokenId and expiresIn to check if user is still logged in or not. Keep this two private and use getter/setter property to access it.
 
-4. Its a good idea to set this response in locaStorage so that we can read it from there whenever page is refreshed, else user object will become empty and logged out.
+4. Its a good idea to set this response in locaStorage so that we can read it from there whenever page is refreshed, else user object will become empty and logged out. Generally call this method of reading localStorage from app.component.ts as its the first component called. This helps in Auto-logging in the user everytime.
 
 5. LocalStorage has few properties like:
 localStorage.setItem(key, value)    //value needs to be a string so convert model to string using JSON.stringify
 localStorage.getItem(key)           //return type is a string so convert it to model using JSON.parse(model)
 localStorage.clear()                //clears all the localStorage data
 localStorage.removeItem(key)        //removes a localStorage item based on key
+
+6. AutoLogout: Logout the user as soon as token expires, so write a setTimeOut function to do the same. If user clicks logout on its own, its important to assign this setTimeOut to a variable and do clearTimeOut(varName) else the timer keeps ticking and logout will be called after expiration. Also, assign varname as null.
