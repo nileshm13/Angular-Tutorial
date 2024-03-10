@@ -133,10 +133,9 @@ h2{
   }
 }
 
-.active-route{
+.page-header-primary-nav .active-route{
   font-size: 18px;
   font-weight: bold;
-  color: green;
-  /* Check why this color does not change */
+  color: #FF5733;
 }
 

@@ -16,4 +16,9 @@ export class ProductDetailsComponent {
     this.product = this.productListComp.selectedProduct;    
   }
 
+  closePopup()
+  {
+    this.productListComp.selectedProduct = null;
+  }
+
 }

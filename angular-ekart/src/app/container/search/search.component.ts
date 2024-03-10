@@ -30,7 +30,7 @@ export class SearchComponent {
 
   updateSearchText() {
     this.searchText = this.searchInputElement.nativeElement.value;  //Template Referencing the input textbox via searchTextRef; for template referencing, just use #name_of_your_choice besides an HTML element 
-    this.searchTextChanged.emit(this.searchText);
+    this.searchTextChanged.emit(this.searchText?.toLowerCase());
     console.log(this.searchText);
   }
 
