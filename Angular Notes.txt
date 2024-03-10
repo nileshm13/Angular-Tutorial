@@ -80,3 +80,4 @@ NgClass -> Sets a CSS Class dynamically on an HTML element based on ts expressio
  'btn-search': searchText -> assign btn-search class when searchText has value, searchText is string, so if it has value, it will be true
  'btn-search-disabled': !searchText -> assign btn-search-disabled class when searchText does not have value, searchText is string, so if its empty, it will be false
 Each of these classes are expecting boolean values, in Typescript, null,undefined,'',false,0 are treated as false in boolean rest all is true.
+
