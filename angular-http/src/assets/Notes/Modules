@@ -1,0 +1,6 @@
+To create a feature module, create a class and decorate it with @NgModule decorator, specify all the components, services, pipes, directives, etc in declarations array.
+Also export these components so that when app module imports it, these components are visible to app module.
+We need to import all the necessary module as well such as CommonModule, FormsModule, HttpModule, etc. Browser Module should be imported only once in application as it initializes some application contents which should be a one time activity hence we import common module in feature module. 
+Each module is independent of each other, so they cannot communicate with each other, also a component declared in one module cannot be declared again in another component, for these we use shared module.
+For a shared module, declare all the reusable compoenents like loader,snackbar in declarations and exports array, we can also deClare reusable module like HTTPModule, FormsModule, etc. here. Now, export this shared module and import it in feature module. This feature module will later be imported in app module anyways which will indirectly make shared module accessible to app module. Importing shared module in app module as well as feature module gives an error.
+For creating a new component, we need to specify module in which it needs to be created like: ng g c cmpname --module mdlName
