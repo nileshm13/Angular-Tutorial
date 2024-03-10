@@ -11,7 +11,7 @@ export class ContainerComponent {
   showNgTemplate: boolean = false;
   showNgContainer: boolean = false;
   showTestPage: boolean = true;
-  @ViewChild('product-list') productListComponent : ProductListComponent
+  @ViewChild('product-list') productListComponent: ProductListComponent
 
   OnSearchTextChanged(value: string) {
     this.searchText = value;
